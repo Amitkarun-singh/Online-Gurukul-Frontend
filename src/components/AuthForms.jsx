@@ -16,7 +16,7 @@ const AuthForms = () => {
   });
 
   const [registerData, setRegisterData] = useState({
-    name: '',
+    fullName: '',
     email: '',
     password: '',
     dob: '',
@@ -41,7 +41,7 @@ const AuthForms = () => {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/v1/users/login', loginData);
+      const response = await axios.post('/api/v1/users/login', loginData);
       if (response.data.success) {
         navigate('/');
       }
@@ -61,7 +61,7 @@ const AuthForms = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:8000/api/v1/users/register', formData, {
+      const response = await axios.post('/api/v1/users/register', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -84,7 +84,7 @@ const AuthForms = () => {
             Login
             <span className="underline"></span>
           </button>
-          <form className="form form-login" onSubmit={handleLoginSubmit}>
+          <form action='/register' className="form form-login" onSubmit={handleLoginSubmit}>
             <fieldset>
               <legend>Please, enter your email and password for login.</legend>
               <div className="input-block">
@@ -112,12 +112,12 @@ const AuthForms = () => {
             Register
             <span className="underline"></span>
           </button>
-          <form className="form form-signup" onSubmit={handleRegisterSubmit}>
+          <form action='/register' className="form form-signup" onSubmit={handleRegisterSubmit}>
             <fieldset>
               <legend>Please, enter your details to register.</legend>
               <div className="input-block">
                 <label htmlFor="signup-name">Name</label>
-                <input id="signup-name" type="text" name="name" required onChange={handleRegisterChange} />
+                <input id="signup-name" type="text" name="fullName" required onChange={handleRegisterChange} />
               </div>
               <div className="input-block">
                 <label htmlFor="signup-email">E-mail</label>
