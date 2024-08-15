@@ -75,7 +75,7 @@ const AuthForms = () => {
     }
   };
 
-  return (
+  return (//added
     <section className="forms-section">
       <h1 className="section-title">Authenticate to Access Online Gurukul</h1>
       <div className="forms">
