@@ -85,7 +85,7 @@ export default function LogIn({...props }) {
                         leftIcon={
                         <div className="flex h-[2.50rem] w-[2.50rem] items-center justify-center rounded-md bg-red-600_02">
                             <Img
-                            src="images/img_googleplus_1_1.svg"
+                            src="Images/img_googleplus_1_1.svg"
                             alt="Google-plus (1) 1"
                             className="h-[1.50rem] w-[1.50rem] rounded-md p-[0.50rem]"
                             />
