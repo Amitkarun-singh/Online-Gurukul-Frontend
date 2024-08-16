@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../styles/AuthForms.css';
+// import '../styles/AuthForms.css';
 
 axios.defaults.withCredentials = true;
 
@@ -76,7 +76,7 @@ const AuthForms = () => {
   };
 
   return (//added
-    <section className="forms-section">
+    <section className="forms-section bg-black-600 max-w-[600px]">
       <h1 className="section-title">Authenticate to Access Online Gurukul</h1>
       <div className="forms">
         <div className={`form-wrapper ${isLoginActive ? 'is-active' : ''}`}>
