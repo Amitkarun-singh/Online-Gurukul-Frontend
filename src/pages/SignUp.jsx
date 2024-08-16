@@ -21,7 +21,7 @@ export default function SignUp({ ...props }) {
                         {/* logo section */}
                         <div className="flex flex-col gap-6">
                             <Img
-                                src="images/img_header_logo.png"
+                                src="images/img_header_main_logo.png"
                                 alt="Header Logo"
                                 className="h-5.5 w-32 object-contain"
                             />
@@ -42,7 +42,7 @@ export default function SignUp({ ...props }) {
                                     }}
                                     ref={sliderRef}
                                     items={[...Array(6)].map(() => (
-                                        <React.Fragment key={Math.random()}>
+                                       <React.Fragment key={Math.random()}>
                                             <Img
                                                 src="images/img_5790719_1.png"
                                                 alt="Slider Image"

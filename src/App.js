@@ -9,8 +9,8 @@ function App() {
     <Router>
       <div className="App">
         {/* <AuthForms /> */}
-        {/* <SignUp /> */}
-        <LogIn/>
+        <SignUp />
+        {/* <LogIn/> */}
       </div>
     </Router>
   );
