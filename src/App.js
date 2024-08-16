@@ -1,12 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import AuthForms from './components/AuthForms';
+// import AuthForms from './components/AuthForms';
+import SignUp from './pages/SignUp.jsx';
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <AuthForms />
+        {/* <AuthForms /> */}
+        <SignUp />
       </div>
     </Router>
   );
