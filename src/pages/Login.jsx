@@ -6,19 +6,25 @@ import { Input } from "../components/Input";
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function LogIn({ ...props }) {
     const [sliderState, setSliderState] = useState(0);
     const sliderRef = React.useRef(null);
     const navigate = useNavigate();
     const [loginData, setLoginData] = useState({
-        email: '',
+        text: '',
         password: '',
     });
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [usernameError, setUsernameError] = useState('');
+    const [passwordError, setPasswordError] = useState('');
 
     const handleLoginChange = (e) => {
         setLoginData({ ...loginData, [e.target.name]: e.target.value });
+        setUsernameError('');
+        setPasswordError('');
     };
 
     const handleLoginSubmit = async (e) => {
@@ -26,10 +32,27 @@ export default function LogIn({ ...props }) {
         try {
             const response = await axios.post('/api/v1/users/login', loginData);
             if (response.data.success) {
+                toast.success(response.data.message);
                 navigate('/register');
             }
         } catch (error) {
             console.error('Login failed:', error.response?.data?.message || error.message);
+            if (error.response?.data?.message) {
+                if (error.response.data.message.includes('username')) {
+                    let userError = error.response.data.message
+                    setUsernameError(userError);
+                    setPasswordError('');
+                } else if (error.response.data.message.includes('password')) {
+                    let passwordError = error.response.data.message
+                    setUsernameError('');
+                    setPasswordError(passwordError);
+                }else{
+                    toast.error(error.response?.data?.message || error.message);
+                    setUsernameError('');
+                    setPasswordError('');
+                }
+            }
+            
         }
     };
 
@@ -108,6 +131,7 @@ export default function LogIn({ ...props }) {
                                                 }
                                                 className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
                                             />
+                                            {usernameError && <Heading as="p" className="!text-[1.00rem] !text-red-a700">{usernameError}</Heading>}
                                         </div>
                                         {/* password input section */}
                                         <div className="flex flex-col items-start gap-[0.50rem] w-full">
@@ -132,6 +156,7 @@ export default function LogIn({ ...props }) {
                                                 src={showConfirmPassword ? "images/img_eye_1_1.svg" : "images/img_eye_1_2.svg"} alt="Eye (1) 1" className="h-[1.13rem] w-[1.13rem] cursor-pointer" />}
                                                 className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
                                             />
+                                            {passwordError && <Heading as="p" className="!text-[1.00rem] !text-red-a700">{passwordError}</Heading>}
                                         </div>
                                     </div>
                                     {/* signin button section */}
