@@ -84,7 +84,7 @@ const AuthForms = () => {
             Login
             <span className="underline"></span>
           </button>
-          <form action='/register' className="form form-login" onSubmit={handleLoginSubmit}>
+          <form action='/login' className="form form-login" onSubmit={handleLoginSubmit}>
             <fieldset>
               <legend>Please, enter your email and password for login.</legend>
               <div className="input-block">

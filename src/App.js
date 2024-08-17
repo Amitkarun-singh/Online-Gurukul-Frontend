@@ -7,7 +7,7 @@ import LogIn from './pages/Login.jsx';
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="App bg-[#00BEFF] bg-opacity-25">
         {/* <AuthForms /> */}
         {/* <SignUp /> */}
         <LogIn/>

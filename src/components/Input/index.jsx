@@ -7,15 +7,15 @@ const shapes = {
 
 const variants = {
   fill: {
-    white_A700: "bg-white_A700 text-gray_700_01",
-    white_A700_33: "bg-white_A700_33 text-white_A700_33",
+    white_A700: "bg-white_a700 text-gray_700_01",
+    white_A700_33: "bg-white_a700_33 text-white_a700_33",
   },
 };
 //......
 const sizes = {
-  md: "p-[1.13rem] sm:p-[1.25rem] pl-[2.13rem] text-[1.00rem]",
-  sm: "p-[1.13rem] pl-[1.13rem] text-[0.88rem]",
-  lg: "p-[1.3rem] sm:p-[1.25rem] pl-[2.13rem] text-[1.00rem]",
+  md: "h-[4.13rem] pl-[1.25rem] pr-[0.38rem] text-[1.00rem]",
+  sm: "h-[3.13rem] pl-[1.13rem] pr-[2.13rem] text-[1.00rem]",
+  lg: "h-[3.63rem] pl-[1.25rem] pr-[2.13rem] text-[1.00rem]",
 };
 
 const Input = React.forwardRef(
@@ -32,7 +32,7 @@ const Input = React.forwardRef(
       shape,
       variant = "fill",
       size = "sm",
-      color = "white_A700_33",
+      color = "white_a700_33",
       ...restProps
     },
     ref
@@ -45,8 +45,8 @@ const Input = React.forwardRef(
           size && sizes[size]
         }`}
       >
-        {label && <>{label}</>}
-        {prefix && <>{prefix}</>}
+        {!!label && label}
+        {!!prefix && prefix}
         <input
           ref={ref}
           type={type}
@@ -55,7 +55,7 @@ const Input = React.forwardRef(
           onChange={onChange}
           {...restProps}
         />
-        {suffix && <>{suffix}</>}
+        {!!suffix && suffix}
       </label>
     );
   }
@@ -66,12 +66,12 @@ Input.propTypes = {
   name: PropTypes.string,
   placeholder: PropTypes.string,
   type: PropTypes.string,
-  label: PropTypes.node,
+  label: PropTypes.string,
   prefix: PropTypes.node,
   suffix: PropTypes.node,
   onChange: PropTypes.func,
   shape: PropTypes.oneOf(["round"]),
-  size: PropTypes.oneOf(["md", "lg", "sm"]),
+  size: PropTypes.oneOf(["md", "sx", "sm"]),
   variant: PropTypes.oneOf(["fill"]),
   color: PropTypes.oneOf(["white_A700", "white_A700_33"]),
 };
