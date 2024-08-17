@@ -109,7 +109,7 @@ export default function LogIn({ ...props }) {
                                     <div className="flex flex-col items-start gap-[1.25rem] self-stretch">
                                         <div className="flex flex-col items-start gap-[0.50rem] w-full">
                                             <Heading size="textmd" as="h3" className="mt-[0.25rem] !text-gray-900">
-                                                Email
+                                                E-mail
                                             </Heading>
                                             <Input
                                                 color="white_A700"
@@ -118,6 +118,7 @@ export default function LogIn({ ...props }) {
                                                 name="email"
                                                 placeholder="user@example.com"
                                                 onChange={handleLoginChange} // Handle input change
+                                                required
                                                 prefix={
                                                     <Img
                                                         src="images/img_message_24_outline.svg"
@@ -139,7 +140,8 @@ export default function LogIn({ ...props }) {
                                                 type="password"
                                                 name="password"
                                                 placeholder="**************"
-                                                onChange={handleLoginChange} // Handle input change
+                                                onChange={handleLoginChange}
+                                                required // Handle input change
                                                 prefix={
                                                     <Img
                                                         src="images/img_lockpad_locksafesecurityprotectedlock_alt_24_outline.svg"

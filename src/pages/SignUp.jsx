@@ -11,11 +11,11 @@ export default function SignUp({ ...props }) {
     const sliderRef = React.useRef(null);
 
     return (
-        <div {...props} className="min-w-[80.00rem]">
+        <div {...props} className="min-w-[80.00rem] bg-blue-300_01 bg-opacity-25">
             {/* header section */}
             <div className="container-xs flex min-w-[80.00rem] justify-center px-[3.50rem] md:px-[1.25rem]">
                 {/* logo slider section */}
-                <div className="flex w-[90%] items-center justify-center rounded-[14px] bg-white-a700 my-[4.30rem] px-[3.50rem] py-[4.88rem] md:w-full md:flex-col md:p-[1.25rem]">
+                <div className="flex w-[95%] items-center justify-around gap-[2.00rem] rounded-[14px] bg-white-a700 my-[2.00rem] px-[3.50rem] py-[4.88rem] md:w-full md:flex-col md:p-[1.25rem]">
                     {/* navigation settings section */}
                     <div className="flex w-[42%] flex-col gap-[1.50rem] md:w-full sm:hidden">
                         {/* logo section */}
@@ -50,13 +50,13 @@ export default function SignUp({ ...props }) {
                             </div>
                         </div>
                     </div>
-
-                {/* signup form section */}
-                <div className="flex flex-1 items-center justify-end md:self-stretch sm:flex-col">
-                    <div className="h-[26.00rem] w-[0.06rem] bg-gradient sm:h-[0.06rem] sm:w-[40.00rem]" />
+                    <div className="h-[36.00rem] w-[0.06rem] bg-gradient sm:h-[0.06rem] sm:w-[40.00rem]" />
+                    {/* signup form section */}
+                    <div className="flex flex-1 items-center justify-end md:self-stretch sm:flex-col">
+                    
 
                     {/* signup options section */}
-                    <div className="flex w-[92%] flex-col gap-[1.50rem] sm:w-full">
+                    <div className="flex w-full flex-col gap-[1.50rem] sm:w-full">
                         <div className="flex flex-col items-center gap-[1.25rem]">
                                     <div className="flex flex-col items-end gap-[0.25rem]">
                                         <Button
@@ -85,7 +85,7 @@ export default function SignUp({ ...props }) {
                                     </div>
                         {/* signup form inputs section */}
                         <div className="flex flex-col items-end gap-[1.88rem]">
-                            <div className="flex flex-col items-start gap-[1.25rem] self-stretch">
+                            <div className="flex flex-col items-start gap-[0.25rem] self-stretch">
                                 <div className="flex w-[80%] flex-col items-start gap-[0.50rem] w-full">
                                     <Heading
                                         size="textmd"
@@ -100,6 +100,30 @@ export default function SignUp({ ...props }) {
                                         type="text"
                                         name="fullName"
                                         placeholder="Enter Your Full Name"
+                                        prefix={
+                                            <Img
+                                                src="images/img_account_24_outline.svg"
+                                                alt="Account / 24 / Outline"
+                                                className="h-[1.13rem] w-[1.13rem]"
+                                            />
+                                        }
+                                        className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
+                                    />
+                                </div>
+                                <div className="flex w-[80%] flex-col items-start gap-[0.50rem] w-full">
+                                    <Heading
+                                        size="textmd"
+                                        as="h4"
+                                        className="mt-[0.25rem] !text-gray-900"
+                                    >
+                                        Username
+                                    </Heading>
+                                    <Input
+                                        color="white"
+                                        size="sm"
+                                        type="text"
+                                        name="username"
+                                        placeholder="Enter Unique Username"
                                         prefix={
                                             <Img
                                                 src="images/img_account_24_outline.svg"
@@ -134,105 +158,121 @@ export default function SignUp({ ...props }) {
                                         className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
                                     />
                                 </div>
-                                <div className="flex w-[80%] flex-col items-start gap-[0.50rem] w-full">
-                                    <Heading
-                                        size="textmd"
-                                        as="h4"
-                                        className="mt-[0.25rem] !text-gray-900"
-                                    >
-                                        Password
-                                    </Heading>
-                                    <Input
-                                        color="white"
-                                        size="sm"
-                                        type="password"
-                                        name="password"
-                                        placeholder="*********"
-                                        prefix={
-                                            <Img
-                                                src="images/img_lockpad_locksafesecurityprotectedlock_alt_24_outline.svg"
-                                                alt="Lock,pad Lock,safe,security,protected,lock Alt, / 24 / Outline"
-                                                className="h-[1.13rem] w-[1.13rem]"
-                                            />
-                                        }
-                                        suffix={
-                                            <Img
-                                                src="images/img_eye_1_1.svg"
-                                                alt="Eye (1) 1"
-                                                className="h-[1.13rem] w-[1.13rem]"
-                                            />
-                                        }
-                                        className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
-                                    />
+
+                                <div className="flex w-full justify-between gap-[1rem]">
+                                    <div className="flex w-[48%] flex-col items-start gap-[0.50rem]">
+                                        <Heading
+                                            size="textmd"
+                                            as="h4"
+                                            className="mt-[0.25rem] !text-gray-900"
+                                        >
+                                            Password
+                                        </Heading>
+                                        <Input
+                                            color="white"
+                                            size="sm"
+                                            type="password"
+                                            name="password"
+                                            placeholder="********"
+                                            prefix={
+                                                <Img
+                                                    src="images/img_lockpad_locksafesecurityprotectedlock_alt_24_outline.svg"
+                                                    alt="Lock,pad Lock,safe,security,protected,lock Alt, / 24 / Outline"
+                                                    className="h-[1.13rem] w-[1.13rem]"
+                                                />
+                                            }
+                                            suffix={
+                                                <Img
+                                                    src="images/img_eye_1_1.svg"
+                                                    alt="Eye (1) 1"
+                                                    className="h-[1.13rem] w-[1.13rem]"
+                                                />
+                                            }
+                                            className="gap-[0.88rem] rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
+                                        />
+                                    </div>
+
+
+                                    <div className="flex w-[48%] flex-col items-start gap-[0.50rem]">
+                                        <Heading
+                                            size="textmd"
+                                            as="h4"
+                                            className="mt-[0.25rem] !text-gray-900"
+                                        >
+                                            Confirm Password
+                                        </Heading>
+                                        <Input
+                                            color="white"
+                                            size="sm"
+                                            type="password"
+                                            name="password"
+                                            placeholder="********"
+                                            prefix={
+                                                <Img
+                                                    src="images/img_lockpad_locksafesecurityprotectedlock_alt_24_outline.svg"
+                                                    alt="Lock,pad Lock,safe,security,protected,lock Alt, / 24 / Outline"
+                                                    className="h-[1.13rem] w-[1.13rem]"
+                                                />
+                                            }
+                                            suffix={
+                                                <Img
+                                                    src="images/img_eye_1_1.svg"
+                                                    alt="Eye (1) 1"
+                                                    className="h-[1.13rem] w-[1.13rem]"
+                                                />
+                                            }
+                                            className="gap-[0.88rem] rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
+                                        />
+                                    </div>
                                 </div>
-                                <div className="flex w-[80%] flex-col items-start gap-[0.50rem] w-full">
-                                    <Heading
-                                        size="textmd"
-                                        as="h4"
-                                        className="mt-[0.25rem] !text-gray-900"
-                                    >
-                                        Date of Birth
-                                    </Heading>
-                                    <Input
-                                        color="white"
-                                        size="sm"
-                                        type="date"
-                                        name="dob"
-                                        placeholder="MM/DD/YYYY"
-                                        prefix={
-                                            <Img
-                                                src="images/date-27.svg"
-                                                alt="Lock,pad Lock,safe,security,protected,lock Alt, / 24 / Outline"
-                                                className="h-[1.13rem] w-[1.13rem]"
-                                            />
-                                        }
-                                        className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
-                                    />
+
+                                <div className="flex w-full justify-between gap-[1rem]">
+                                    <div className="flex w-[48%] flex-col items-start gap-[0.50rem]">
+                                        <Heading
+                                            size="textmd"
+                                            as="h4"
+                                            className="mt-[0.25rem] !text-gray-900"
+                                        >
+                                            Date of Birth
+                                        </Heading>
+                                        <Input
+                                            color="white"
+                                            size="sm"
+                                            type="date"
+                                            name="dob"
+                                            placeholder="DD/MM/YYYY"
+                                            prefix={
+                                                <Img
+                                                    src="images/date-27.svg"
+                                                    alt="Date Icon"
+                                                    className="h-[1.13rem] w-[1.13rem]"
+                                                />
+                                            }
+                                            className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
+                                        />
+                                    </div>
+
+                                    <div className="flex w-[48%] flex-col items-start gap-[0.50rem]">
+                                        <Heading
+                                            size="textmd"
+                                            as="h4"
+                                            className="mt-[0.25rem] !text-gray-900"
+                                        >
+                                            Role
+                                        </Heading>
+                                        <select
+                                            name="role"
+                                            id="signup-role"
+                                            className="gap-[0.88rem] h-[3.13rem] self-stretch rounded-[10px] border border-solid border-gray-300 px-3 py-2"
+                                        >
+                                            <option value="" disabled selected hidden>Register as</option>
+                                            <option value="student">Student</option>
+                                            <option value="teacher">Teacher</option>
+                                            <option value="admin">Admin</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div className="flex w-[80%] flex-col items-start gap-[0.50rem] w-full">
-                                    <Heading
-                                        size="textmd"
-                                        as="h4"
-                                        className="mt-[0.25rem] !text-gray-900"
-                                    >
-                                        Username
-                                    </Heading>
-                                    <Input
-                                        color="white"
-                                        size="sm"
-                                        type="text"
-                                        name="username"
-                                        placeholder="Enter Unique Username"
-                                        prefix={
-                                            <Img
-                                                src="images/img_account_24_outline.svg"
-                                                alt="Account / 24 / Outline"
-                                                className="h-[1.13rem] w-[1.13rem]"
-                                            />
-                                        }
-                                        className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
-                                    />
-                                </div>
-                                
-                                <div className="flex w-[80%] flex-col items-start gap-[0.50rem] w-full">
-                                <Heading
-                                    size="textmd"
-                                    as="h4"
-                                    className="mt-[0.25rem] !text-gray-900"
-                                >
-                                    Role
-                                </Heading>
-                                    <select
-                                        name="role"
-                                        id="signup-role"
-                                        className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300 px-3 py-2"
-                                    >
-                                        <option value="" disabled selected hidden>Register as</option>
-                                        <option value="student">Student</option>
-                                        <option value="teacher">Teacher</option>
-                                        <option value="admin">Admin</option>
-                                    </select>
-                                </div>
+
                                 <div className="flex w-[80%] flex-col items-start gap-[0.50rem] w-full">
                                     <Heading
                                         size="textmd"
@@ -245,7 +285,7 @@ export default function SignUp({ ...props }) {
                                         id="signup-photo"
                                         type="file"
                                         name="photo"
-                                        className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300 px-3 py-2"
+                                        className="gap-[0.88rem]  self-stretch justify-item item-center rounded-[10px] border border-solid border-gray-300 px-3 py-2"
                                     />
                                 </div>
                                 
@@ -253,21 +293,23 @@ export default function SignUp({ ...props }) {
 
                                 <Button
                                     size="md"
-                                    className="min-w-[23.13rem] bg-[#00BEFF] rounded-[10px] font-medium"
+                                    className="min-w-[23.13rem] bg-[#00BEFF] ml-14 rounded-[10px] font-medium"
                                 >
                                     Sign up
                                 </Button>
                                </div>
                             </div>
-                            <div className="flex items-center justify-start pl-16 gap-[3.69rem]"></div>
+                            <div className="flex items-center justify-start gap-[0.50rem]">
                                 <CheckBox
                                     name="terms_checkbox"
-                                    label="I agreed to the Terms & Conditions"
+                                    label=""
                                     as="h6"
                                     id="TermsCheckbox"
                                     className="!text-[1.00rem] !font-normal"
                                 />
+                                I agreed to the Terms & Conditions
                             </div>
+                        </div>
 
                         {/* already have an account? */}
                         
