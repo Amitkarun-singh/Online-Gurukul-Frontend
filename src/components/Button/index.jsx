@@ -10,11 +10,11 @@ const variants = {
   fill: {
     orange_200_01: "bg-orange-200_01 text-white-a700",
     white_a700: "bg-white-a700 text-gray-988",
-    red_50: "bg-red-50",
-    red_300_01: "bg-red-300_01 text-white-a700",
+    blue_50: "bg-red-50",
+    blue_300_01: "bg-blue-300_01 text-white-a700",
   },
   outline: {
-    red_300_01: "border-red-300_01 border border-solid text-red-300_01",
+    blue_300_01: "border-blue-300_01 border border-solid text-blue-300_01",
   },
 };
 
@@ -35,7 +35,7 @@ const Button = ({
   shape,
   variant = "fill",
   size = "",
-  color = "red_300_01",
+  color = "blue_300_01",
   ...restProps
 }) => {
   return (
