@@ -21,7 +21,7 @@ module.exports = {
           "900_b2": "#000000b2",
           "900_cc": "#000000cc",
         },
-        blue: { 50: "#e9f3fe", 300: "#699dee" },
+        blue: { 50: "#e9f3fe", 300: "#699dee", "300_01": "#00BEFF"},
         blue_gray: {
           50: "#ebf2f9",
           100: "#d6ced7",
