@@ -13,13 +13,13 @@ export default function SignUp({ ...props }) {
     return (
         <div {...props} className="min-w-[80rem]">
             {/* header section */}
-            <div className="container flex justify-center px-14 md:px-5 bg-black min-w-[80rem]">
+            <div className="container-xs flex min-w-[80.rem] justify-center px-[3.50rem] md:px-[1.25]">
                 {/* logo slider section */}
-                <div className="flex w-[90%] items-center justify-center rounded-2xl bg-white px-14 py-20 md:w-full md:flex-col md:p-5">
+                <div className="flex w-[90%] items-center justify-center rounded-[14px] bg-white-a700 px-[3.50rem] py-[4.88rem] md:w-full md:flex-col md:p-[1.25rem]">
                     {/* navigation settings section */}
-                    <div className="flex w-[42%] flex-col gap-6 md:w-full">
+                    <div className="flex w-[42%] flex-col gap-[1.50rem] md:w-full">
                         {/* logo section */}
-                        <div className="flex flex-col gap-6">
+                        <div className="flex flex-col gap-[1.50rem]">
                             <Img
                                 src="images/img_header_main_logo.png"
                                 alt="Header Logo"
@@ -53,7 +53,7 @@ export default function SignUp({ ...props }) {
                                 />
                             </div>
                         </div>
-                        <div className="ml-40 flex items-center justify-center md:ml-0">
+                        <div className="ml-[9.88rem] flex items-center justify-center md:ml-0">
                             {[...Array(3)].map((_, i) => (
                                 <React.Fragment key={i}>
                                     {sliderState >=
@@ -66,7 +66,7 @@ export default function SignUp({ ...props }) {
                                                     i * sliderRef?.current?.state?.itemsInSlide
                                                 );
                                             }}
-                                            className="mr-1 inline-block h-2.5 w-2.5 cursor-pointer rounded-full border border-solid border-red-300 bg-white"
+                                            className="mr-[0.31rem] inline-block h-[0.63rem] w-[0.63rem] cursor-pointer rounded-[50%] border border-solid border-red-300_01 bg-white-a700"
                                         />
                                     ) : (
                                         <div
@@ -75,7 +75,7 @@ export default function SignUp({ ...props }) {
                                                     i * sliderRef?.current?.state?.itemsInSlide
                                                 );
                                             }}
-                                            className="mr-1 inline-block h-2 w-2 cursor-pointer rounded-full bg-deep_orange-400"
+                                            className="mr-[0.31rem] inline-block h-[0.50rem] w-[0.50rem] cursor-pointer rounded-full-[50%] bg-deep_orange-400_7f_01"
                                         />
                                     )}
                                 </React.Fragment>
@@ -86,97 +86,94 @@ export default function SignUp({ ...props }) {
 
                 {/* signup form section */}
                 <div className="flex flex-1 items-center justify-end md:self-stretch sm:flex-col">
-                    <div className="h-160 w-0.5 bg-gradient sm:h-0.5 sm:w-160" />
+                    <div className="h-[40.00rem] w-[0.06rem] bg-gradient sm:h-[0.06rem] sm:w-[40.00rem" />
 
                     {/* signup options section */}
-                    <div className="flex w-[92%] flex-col items-end gap-6 sm:w-full">
-                        <div className="flex flex-col gap-5 self-stretch">
-                            <div className="flex flex-col items-end gap-5">
+                    <div className="flex w-[92%] flex-col items-end gap-[1.50rem] sm:w-full">
+                        <div className="flex flex-col gap-[1.25rem] self-stretch">
+                            <div className="flex flex-col items-end gap-[1.25rem]">
                                 <Button
-                                    color="white"
+                                    color="white_A700"
                                     size="md"
                                     leftIcon={
-                                        <div className="flex h-10 w-10 items-center justify-center rounded-md bg-red-600">
+                                        <div className="flex h-[2.50rem] w-[2.50rem] items-center justify-center rounded-md bg-red-600_02">
                                             <Img
                                                 src="images/img_googleplus_1_1.svg"
                                                 alt="Google-plus (1) 1"
-                                                className="h-6 w-6 rounded-md p-2"
+                                                className="h-[1.50rem] w-[1.50rem] rounded-md p-[0.50rem]"
                                             />
                                         </div>
                                     }
-                                    className="min-w-[23.13rem] gap-3.5 rounded-lg border border-solid border-gray-300 text-gray-700"
+                                    className="min-w-[23.13rem] gap-[0.88rem] rounded-[10px] border border-solid border-gray-300 !text-gray-700_01"
                                 >
                                     Sign in with Google
                                 </Button>
-                                <div className="flex items-center justify-end self-stretch px-14 md:px-5">
-                                    <div className="h-0.5 w-5 bg-gray-700" />
-                                    <Heading
-                                        as="h2"
-                                        className="ml-2.5 self-end text-base"
-                                    >
+                                <div className="flex items-center justify-end self-stretch px-[3.50rem] md:px-[1.25rem]">
+                                    <div className="h-[0.06rem] w-[1.25rem] bg-gray-700_01" />
+                                    <Heading as="h2" className="ml-[0.63rem] self-end !text-[1.00rem]">
                                         Or sign in with your email
                                     </Heading>
-                                    <div className="ml-2.5 h-0.5 w-5 bg-gray-700" />
+                                    <div className="ml-[0.63rem] h-[0.06rem] w-[1.25rem] bg-gray-700_01" />
                                 </div>
                             </div>
                         </div>
-
+                    </div>
                         {/* signup form inputs section */}
-                        <div className="flex flex-col items-end gap-7.5">
-                            <div className="flex flex-col items-end gap-5 self-stretch">
-                                <div className="flex w-[80%] flex-col items-start gap-2 md:w-full">
+                        <div className="flex flex-col items-end gap-[1.88rem]">
+                            <div className="flex flex-col items-end gap-[1.25] self-stretch">
+                                <div className="flex w-[80%] flex-col items-start gap-[0.25rem] md:w-full">
                                     <Heading
                                         size="textmd"
                                         as="h3"
-                                        className="mt-1 text-gray-900"
+                                        className="mt-[0.25rem] !text-gray-900"
                                     >
-                                        Full name
+                                        Full Name
                                     </Heading>
                                     <Input
-                                        color="white"
+                                        color="white_A700"
                                         size="xs"
                                         type="text"
-                                        name="Fullname Input"
-                                        placeholder="Enter name"
+                                        name="fullName"
+                                        placeholder="Enter Your Full Name"
                                         prefix={
                                             <Img
                                                 src="images/img_account_24_outline.svg"
                                                 alt="Account / 24 / Outline"
-                                                className="h-4.5 w-4.5"
+                                                className="h-[1.13rem] w-[1.13rem]"
                                             />
                                         }
-                                        className="gap-3.5 self-stretch rounded-br-lg rounded-tr-lg border border-solid border-gray-300"
+                                        className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
                                     />
                                 </div>
-                                <div className="flex w-[80%] flex-col items-start gap-2 md:w-full">
+                                <div className="flex w-[80%] flex-col items-start gap-[0.50rem] md:w-full">
                                     <Heading
                                         size="textmd"
                                         as="h4"
-                                        className="mt-1 text-gray-900"
+                                        className="mt-[0.25rem] !text-gray-900"
                                     >
-                                        Email
+                                        E-mail
                                     </Heading>
                                     <Input
-                                        color="white"
+                                        color="white_A700" 
                                         size="xs"
                                         type="email"
-                                        name="Email Input"
+                                        name="email"
                                         placeholder="user@example.com"
                                         prefix={
                                             <Img
                                                 src="images/img_message_24_outline.svg"
                                                 alt="Message / 24 / Outline"
-                                                className="mb-0.5 h-4.5 w-4.5"
+                                                className="mb-[1.13rem] h-[1.13rem] w-[1.13rem]"
                                             />
                                         }
-                                        className="gap-3.5 self-stretch rounded-br-lg rounded-tr-lg border border-solid border-gray-300"
+                                        className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
                                     />
                                 </div>
-                                <div className="flex w-[80%] flex-col items-start gap-2 md:w-full">
+                                <div className="flex w-[80%] flex-col items-start gap-[0.50rem] md:w-full">
                                     <Heading
                                         size="textmd"
                                         as="h5"
-                                        className="mt-1 text-gray-900"
+                                        className="mt-[0.25rem] !text-gray-900"
                                     >
                                         Password
                                     </Heading>
@@ -184,28 +181,112 @@ export default function SignUp({ ...props }) {
                                         color="white"
                                         size="xs"
                                         type="password"
-                                        name="Password Input"
-                                        placeholder="**************"
+                                        name="password"
+                                        placeholder="*********"
                                         prefix={
                                             <Img
                                                 src="images/img_lockpad_locksafesecurityprotectedlock_alt_24_outline.svg"
                                                 alt="Lock,pad Lock,safe,security,protected,lock Alt, / 24 / Outline"
-                                                className="h-4.5 w-4.5"
+                                                className="h-[1.13rem] w-[1.13rem]"
                                             />
                                         }
                                         suffix={
                                             <Img
                                                 src="images/img_eye_1_1.svg"
                                                 alt="Eye (1) 1"
-                                                className="h-4.5 w-4.5"
+                                                className="h-[1.13rem] w-[1.13rem]"
                                             />
                                         }
-                                        className="gap-3.5 self-stretch rounded-br-lg rounded-tr-lg border border-solid border-gray-300"
+                                        className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
                                     />
                                 </div>
+                                <div className="flex w-[80%] flex-col items-start gap-[0.50rem] md:w-full">
+                                    <Heading
+                                        size="textmd"
+                                        as="h5"
+                                        className="mt-[0.25rem] !text-gray-900"
+                                    >
+                                        Date of Birth
+                                    </Heading>
+                                    <Input
+                                        color="white"
+                                        size="xs"
+                                        type="date"
+                                        name="dob"
+                                        placeholder="DD/MM/YYYY"
+                                        prefix={
+                                            <Img
+                                                src="images/date-27.svg"
+                                                alt="Lock,pad Lock,safe,security,protected,lock Alt, / 24 / Outline"
+                                                className="h-[1.13rem] w-[1.13rem]"
+                                            />
+                                        }
+                                        className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
+                                    />
+                                </div>
+                                <div className="flex w-[80%] flex-col items-start gap-[0.50rem] md:w-full">
+                                    <Heading
+                                        size="textmd"
+                                        as="h5"
+                                        className="mt-[0.25rem] !text-gray-900"
+                                    >
+                                        Username
+                                    </Heading>
+                                    <Input
+                                        color="white"
+                                        size="xs"
+                                        type="text"
+                                        name="username"
+                                        placeholder="Enter Unique Username"
+                                        prefix={
+                                            <Img
+                                                src="images/img_account_24_outline.svg"
+                                                alt="Account / 24 / Outline"
+                                                className="h-[1.13rem] w-[1.13rem]"
+                                            />
+                                        }
+                                        className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
+                                    />
+                                </div>
+                                <div className="flex w-[80%] flex-col items-start gap-[0.50rem] md:w-full">
+                                <Heading
+                                    size="textmd"
+                                    as="h5"
+                                    className="mt-[0.25rem] !text-gray-900"
+                                >
+                                    Role
+                                </Heading>
+                                    <select
+                                        name="role"
+                                        id="signup-role"
+                                        className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300 px-3 py-2"
+                                    >
+                                        <option value="" disabled selected hidden>Register as</option>
+                                        <option value="student">Student</option>
+                                        <option value="teacher">Teacher</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                </div>
+                                <div className="flex w-[80%] flex-col items-start gap-[0.50rem] md:w-full">
+                                    <Heading
+                                        size="textmd"
+                                        as="h5"
+                                        className="mt-[0.25rem] !text-gray-900"
+                                    >
+                                        Profile Photo
+                                    </Heading>
+                                    <input
+                                        id="signup-photo"
+                                        type="file"
+                                        name="photo"
+                                        className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300 px-3 py-2"
+                                    />
+                                </div>
+
+
                                 <Button
                                     size="md"
-                                    className="min-w-[23.13rem] rounded-lg font-medium"
+                                    className="min-w-[23.13rem] bg-[#00BEFF] rounded-[10px] font-medium"
                                 >
                                     Sign up
                                 </Button>
@@ -214,18 +295,17 @@ export default function SignUp({ ...props }) {
                                 name="terms_checkbox"
                                 label="I agreed to the Terms & Conditions"
                                 id="TermsCheckbox"
-                                className="mr-8.5 gap-2.5 pt-1.5 text-base font-semibold text-gray-900"
+                                className="mr-[2.13rem] gap-[0.63rem] pt-[0.38rem] text-b[1.00rem] font-medium text-gray-700_01 md:mr-0"
                             />
-                        </div>
+                            </div>
 
                         {/* already have an account? */}
-                        <div className="flex flex-row gap-2.5 text-base font-semibold text-gray-900">
+                        <div className="flex flex-row justify-end self-stretch pl-[3.50rem] p-[4.25rem] md:px-[1.25rem]">
                             Already have an account?
-                            <span className="text-red-600">Sign in</span>
+                            <div className="text-red-600">Sign in</div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    );
-}
+        );
+    }

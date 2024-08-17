@@ -7,7 +7,7 @@ import LogIn from './pages/Login.jsx';
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="App" >
         {/* <AuthForms /> */}
         <SignUp />
         {/* <LogIn/> */}
