@@ -15,6 +15,7 @@ export default function LogIn({ ...props }) {
         email: '',
         password: '',
     });
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const handleLoginChange = (e) => {
         setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -73,34 +74,14 @@ export default function LogIn({ ...props }) {
                     </div>
                     {/* main content section */}
                     <div className="flex flex-1 items-center justify-end md:self-stretch sm:flex-col">
-                        <div className="h-[26.00rem] w-[0.06rem] bg-gradient sm:h-[0.06rem] sm:w-[40.00rem]" />
+                        <div className="h-[27.26rem] w-[0.06rem] bg-gradient sm:h-[0.06rem] sm:w-[40.00rem]" />
                         <div className="flex w-[92%] flex-col gap-[1.50rem] sm:w-full">
                             {/* signin options section */}
                             <div className="flex flex-col items-center gap-[1.25rem]">
                                 <div className="flex flex-col items-end gap-[0.25rem]">
-                                    <Button
-                                        color="white_A700"
-                                        size="md"
-                                        leftIcon={
-                                            <div className="flex h-[2.50rem] w-[2.50rem] items-center justify-center rounded-md bg-[#00BEFF]">
-                                                <Img
-                                                    src="Images/img_googleplus_1_1.svg"
-                                                    alt="Google-plus (1) 1"
-                                                    className="h-[2.50rem] w-[2.25rem] rounded-md p-[0.50rem] !text"
-                                                />
-                                            </div>
-                                        }
-                                        className="min-w-[23.13rem] gap-[0.88rem] rounded-[10px] border border-solid border-gray-300 !text-gray-700_01"
-                                    >
-                                        Sign in with Google
-                                    </Button>
-                                    <div className="flex items-center justify-end self-stretch pl-[3.50rem] pr-[6.63rem] md:px-[1.25rem]">
-                                        <div className="h-[0.06rem] w-[1.25rem] bg-gray-700_01" />
-                                        <Heading size="textmd" as="h2" className="!text-[0.63rem] self-end !font-normal">
-                                            Or sign in with your email
-                                        </Heading>
-                                        <div className="h-[0.06rem] w-[1.25rem] bg-gray-700_01" />
-                                    </div>
+                                    <Heading size="textlg" as="h2" className="!text-blue-300_01">
+                                        Welcome back!
+                                    </Heading>
                                 </div>
                                 {/* signin form section */}
                                 {/* Wrapped the inputs and Sign In button inside a <form> element */}
@@ -109,13 +90,13 @@ export default function LogIn({ ...props }) {
                                     <div className="flex flex-col items-start gap-[1.25rem] self-stretch">
                                         <div className="flex flex-col items-start gap-[0.50rem] w-full">
                                             <Heading size="textmd" as="h3" className="mt-[0.25rem] !text-gray-900">
-                                                E-mail
+                                                E-mail/Username
                                             </Heading>
                                             <Input
                                                 color="white_A700"
                                                 size="sm"
-                                                type="email"
-                                                name="email"
+                                                type="text"
+                                                name="text"
                                                 placeholder="user@example.com"
                                                 onChange={handleLoginChange} // Handle input change
                                                 required
@@ -137,7 +118,7 @@ export default function LogIn({ ...props }) {
                                             <Input
                                                 color="white_A700"
                                                 size="sm"
-                                                type="password"
+                                                type={showConfirmPassword ? ('text') :('password')}
                                                 name="password"
                                                 placeholder="**************"
                                                 onChange={handleLoginChange}
@@ -149,7 +130,8 @@ export default function LogIn({ ...props }) {
                                                         className="h-[1.13rem] w-[1.13rem]"
                                                     />
                                                 }
-                                                suffix={<Img src="images/img_eye_1_1.svg" alt="Eye (1) 1" className="h-[1.13rem] w-[1.13rem]" />}
+                                                suffix={<Img onClick={() => setShowConfirmPassword((prev) => !prev)}
+                                                src={showConfirmPassword ? "images/img_eye_1_1.svg" : "images/img_eye_1_2.svg"} alt="Eye (1) 1" className="h-[1.13rem] w-[1.13rem] cursor-pointer" />}
                                                 className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
                                             />
                                         </div>
@@ -175,7 +157,7 @@ export default function LogIn({ ...props }) {
                                         Don't have an account?
                                     </Heading>
                                 </a>
-                                <a href="#" className="self-end">
+                                <a href="/register" className="self-end">
                                     <Heading as="p" className="!text-[1.00rem] !text-[#00BEFF]">
                                         Sign Up
                                     </Heading>

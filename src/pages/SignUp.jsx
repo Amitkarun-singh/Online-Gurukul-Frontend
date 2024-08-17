@@ -4,11 +4,60 @@ import { Button } from "../components/Button";
 import { Img } from "../components/Img";
 import { Slider } from "../components/Slider";
 import { Input } from "../components/Input";
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp({ ...props }) {
     const [sliderState, setSliderState] = React.useState(0);
+    const Navigate = useNavigate();
     const sliderRef = React.useRef(null);
+    const [formData, setFormData] = useState({
+        fullName: '',
+        email: '',
+        username: '',
+        password: '',
+        confirmPassword: '',
+        dob: '',
+        role: '',
+        avatar: null,
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleFileChange = (e) => {
+        setFormData({ ...formData, avatar: e.target.files[0] });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const formDataToSend = new FormData();
+        for (const key in formData) {
+            formDataToSend.append(key, formData[key]);
+        }
+        console.log("Form Data:", formData);
+
+        try {
+            const response = await axios.post('/api/v1/users/register', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            if (response.data.success) {
+                // Handle successful registration (e.g., navigate to another page)
+                console.log("User registered successfully");
+                Navigate('/login');
+            }
+            
+        } catch (error) {
+            console.error('Registration failed:', error.response?.data?.message || error.message);
+            console.log("User registration failed",error.response?.data?.message || error.message);
+            
+        }
+    };
 
     return (
         <div {...props} className="min-w-[80.00rem] bg-blue-300_01 bg-opacity-25">
@@ -50,7 +99,7 @@ export default function SignUp({ ...props }) {
                             </div>
                         </div>
                     </div>
-                    <div className="h-[36.00rem] w-[0.06rem] bg-gradient sm:h-[0.06rem] sm:w-[40.00rem]" />
+                    <div className="h-[30.00rem] w-[0.06rem] bg-gradient sm:h-[0.06rem] sm:w-[40.00rem]" />
                     {/* signup form section */}
                     <div className="flex flex-1 items-center justify-end md:self-stretch sm:flex-col">
                     
@@ -58,34 +107,14 @@ export default function SignUp({ ...props }) {
                     {/* signup options section */}
                     <div className="flex w-full flex-col gap-[1.50rem] sm:w-full">
                         <div className="flex flex-col items-center gap-[1.25rem]">
-                                    <div className="flex flex-col items-end gap-[0.25rem]">
-                                        <Button
-                                            color="white_A700"
-                                            size="md"
-                                            leftIcon={
-                                            <div className="flex h-[2.50rem] w-[2.50rem] items-center justify-center rounded-md bg-[#00BEFF]">
-                                                <Img
-                                                src="Images/img_googleplus_1_1.svg"
-                                                alt="Google-plus (1) 1"
-                                                className="h-[2.50rem] w-[2.25rem] rounded-md p-[0.50rem] !text"
-                                                />
-                                            </div>
-                                            }
-                                            className="min-w-[23.13rem] gap-[0.88rem] rounded-[10px] border border-solid border-gray-300 !text-gray-700_01"
-                                        >
-                                            Sign in with google
-                                        </Button>
-                                        <div className="flex items-center justify-end self-stretch pl-[3.50rem] pr-[6.63rem] md:px-[1.25rem]">
-                                        <div className="h-[0.06rem] w-[1.25rem] bg-gray-700_01" />
-                                        <Heading size="textmd" as="h2" className="!text-[0.63rem] self-end !font-normal">
-                                            Or sign in with your email
-                                        </Heading>
-                                        <div className="h-[0.06rem] w-[1.25rem] bg-gray-700_01" />
-                                        </div>
-                                    </div>
+                            <div className="flex flex-col items-end gap-[0.25rem]">
+                                    <Heading size="textlg" as="h2" className="!text-blue-300_01">
+                                        Enter your details!
+                                    </Heading>
+                            </div>
                         {/* signup form inputs section */}
-                        <div className="flex flex-col items-end gap-[1.88rem]">
-                            <div className="flex flex-col items-start gap-[0.25rem] self-stretch">
+                        <form onSubmit={handleSubmit} className="flex flex-col items-end gap-[1.88rem]">
+                            <div className="flex flex-col items-start gap-[1.25rem] self-stretch">
                                 <div className="flex w-[80%] flex-col items-start gap-[0.50rem] w-full">
                                     <Heading
                                         size="textmd"
@@ -99,6 +128,8 @@ export default function SignUp({ ...props }) {
                                         size="sm"
                                         type="text"
                                         name="fullName"
+                                        value={formData.fullName}
+                                        onChange={handleChange}
                                         placeholder="Enter Your Full Name"
                                         prefix={
                                             <Img
@@ -123,6 +154,8 @@ export default function SignUp({ ...props }) {
                                         size="sm"
                                         type="text"
                                         name="username"
+                                        value={formData.username}
+                                        onChange={handleChange}
                                         placeholder="Enter Unique Username"
                                         prefix={
                                             <Img
@@ -147,6 +180,8 @@ export default function SignUp({ ...props }) {
                                         size="sm"
                                         type="email"
                                         name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
                                         placeholder="user@example.com"
                                         prefix={
                                             <Img
@@ -173,6 +208,8 @@ export default function SignUp({ ...props }) {
                                             size="sm"
                                             type="password"
                                             name="password"
+                                            value={formData.password}
+                                            onChange={handleChange}
                                             placeholder="********"
                                             prefix={
                                                 <Img
@@ -205,7 +242,9 @@ export default function SignUp({ ...props }) {
                                             color="white"
                                             size="sm"
                                             type="password"
-                                            name="password"
+                                            name="confirmPassword"
+                                            value={formData.confirmPassword}
+                                            onChange={handleChange}
                                             placeholder="********"
                                             prefix={
                                                 <Img
@@ -240,6 +279,8 @@ export default function SignUp({ ...props }) {
                                             size="sm"
                                             type="date"
                                             name="dob"
+                                            value={formData.dob}
+                                            onChange={handleChange}
                                             placeholder="DD/MM/YYYY"
                                             prefix={
                                                 <Img
@@ -263,6 +304,8 @@ export default function SignUp({ ...props }) {
                                         <select
                                             name="role"
                                             id="signup-role"
+                                            value={formData.role}
+                                            onChange={handleChange}
                                             className="gap-[0.88rem] h-[3.13rem] self-stretch rounded-[10px] border border-solid border-gray-300 px-3 py-2"
                                         >
                                             <option value="" disabled selected hidden>Register as</option>
@@ -284,7 +327,9 @@ export default function SignUp({ ...props }) {
                                     <input
                                         id="signup-photo"
                                         type="file"
-                                        name="photo"
+                                        name="avatar"
+                                        accept="image/*"
+                                        onChange={handleFileChange}
                                         className="gap-[0.88rem]  self-stretch justify-item item-center rounded-[10px] border border-solid border-gray-300 px-3 py-2"
                                     />
                                 </div>
@@ -293,33 +338,26 @@ export default function SignUp({ ...props }) {
 
                                 <Button
                                     size="md"
+                                    onClick={handleSubmit}
                                     className="min-w-[23.13rem] bg-[#00BEFF] ml-14 rounded-[10px] font-medium"
+                                    a href="/login"
                                 >
                                     Sign up
                                 </Button>
                                </div>
-                            </div>
-                            <div className="flex items-center justify-start gap-[0.50rem]">
-                                <CheckBox
-                                    name="terms_checkbox"
-                                    label=""
-                                    as="h6"
-                                    id="TermsCheckbox"
-                                    className="!text-[1.00rem] !font-normal"
-                                />
-                                I agreed to the Terms & Conditions
-                            </div>
+                            </form>
+                            
                         </div>
 
                         {/* already have an account? */}
                         
-                        <div className="mx-[3.88rem] flex flex-wrap justify-center md:mx-0">
-                                <a href="#">
+                            <div className="mx-[0.50rem] flex flex-wrap justify-center md:mx-0">
+                               <a href="/login">
                                 <Heading as="h6" className="!text-[1.00rem]">
                                     Already have an account?
                                 </Heading>
                                 </a>
-                                <a href="#" className="self-end">
+                                <a href="/login" className="self-end">
                                 <Heading as="p" className="!text-[1.00rem] !text-[#00BEFF]">
                                     Sign In
                                 </Heading>
