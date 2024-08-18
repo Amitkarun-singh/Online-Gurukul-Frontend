@@ -1,5 +1,4 @@
 import { Heading } from "../components/Heading";
-import { CheckBox } from "../components/CheckBox";
 import { Button } from "../components/Button";
 import { Img } from "../components/Img";
 import { Slider } from "../components/Slider";
@@ -7,10 +6,12 @@ import { Input } from "../components/Input";
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function SignUp({ ...props }) {
     const [sliderState, setSliderState] = React.useState(0);
-    const Navigate = useNavigate();
+    const navigate = useNavigate();
     const sliderRef = React.useRef(null);
     const [formData, setFormData] = useState({
         fullName: '',
@@ -22,46 +23,58 @@ export default function SignUp({ ...props }) {
         role: '',
         avatar: null,
     });
+    const [showPassword, setShowPassword] = useState(false);
+    const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+    const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+        setErrors({ ...errors, [name]: '' });
     };
 
     const handleFileChange = (e) => {
         setFormData({ ...formData, avatar: e.target.files[0] });
+        setErrors({ ...errors, avatar: '' });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
         const formDataToSend = new FormData();
         for (const key in formData) {
             formDataToSend.append(key, formData[key]);
         }
-        console.log("Form Data:", formData);
 
         try {
-            const response = await axios.post('/api/v1/users/register', formData, {
+            const response = await axios.post('/api/v1/users/register', formDataToSend, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
+                
             });
             if (response.data.success) {
-                // Handle successful registration (e.g., navigate to another page)
-                console.log("User registered successfully");
-                Navigate('/login');
+                toast.success("User registered successfully");
+                navigate('/login');
+                console.log(response);
             }
-            
         } catch (error) {
             console.error('Registration failed:', error.response?.data?.message || error.message);
-            console.log("User registration failed",error.response?.data?.message || error.message);
+            console.log(error.response);
             
+            if (error.response?.data?.message) {
+                toast.error(error.response.data.message);
+            } else {
+                toast.error('Registration failed. Please try again.');
+            }
         }
     };
+
 
     return (
         <div {...props} className="min-w-[80.00rem] bg-blue-300_01 bg-opacity-25">
             {/* header section */}
+            <ToastContainer />
             <div className="container-xs flex min-w-[80.00rem] justify-center px-[3.50rem] md:px-[1.25rem]">
                 {/* logo slider section */}
                 <div className="flex w-[95%] items-center justify-around gap-[2.00rem] rounded-[14px] bg-white-a700 my-[2.00rem] px-[3.50rem] py-[4.88rem] md:w-full md:flex-col md:p-[1.25rem]">
@@ -140,6 +153,7 @@ export default function SignUp({ ...props }) {
                                         }
                                         className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
                                     />
+                                    {errors.fullName && <Heading as="p" className="!text-[1.00rem] !text-red-a700">{errors.fullName}</Heading>}
                                 </div>
                                 <div className="flex w-[80%] flex-col items-start gap-[0.50rem] w-full">
                                     <Heading
@@ -166,6 +180,7 @@ export default function SignUp({ ...props }) {
                                         }
                                         className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
                                     />
+                                    {errors.username && <Heading as="p" className="!text-[1.00rem] !text-red-a700">{errors.username}</Heading>}
                                 </div>
                                 <div className="flex w-[80%] flex-col items-start gap-[0.50rem] w-full">
                                     <Heading
@@ -192,21 +207,18 @@ export default function SignUp({ ...props }) {
                                         }
                                         className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
                                     />
+                                    {errors.email && <Heading as="p" className="!text-[1.00rem] !text-red-a700">{errors.email}</Heading>}
                                 </div>
 
                                 <div className="flex w-full justify-between gap-[1rem]">
                                     <div className="flex w-[48%] flex-col items-start gap-[0.50rem]">
-                                        <Heading
-                                            size="textmd"
-                                            as="h4"
-                                            className="mt-[0.25rem] !text-gray-900"
-                                        >
+                                        <Heading size="textmd" as="h4" className="mt-[0.25rem] !text-gray-900">
                                             Password
                                         </Heading>
                                         <Input
                                             color="white"
                                             size="sm"
-                                            type="password"
+                                            type={showPassword ? 'text' : 'password'}
                                             name="password"
                                             value={formData.password}
                                             onChange={handleChange}
@@ -220,16 +232,16 @@ export default function SignUp({ ...props }) {
                                             }
                                             suffix={
                                                 <Img
-                                                    src="images/img_eye_1_1.svg"
+                                                    src={showPassword ? "images/img_eye_1_1.svg" : "images/img_eye_1_2.svg"}
                                                     alt="Eye (1) 1"
-                                                    className="h-[1.13rem] w-[1.13rem]"
+                                                    className="h-[1.13rem] w-[1.13rem] cursor-pointer"
+                                                    onClick={() => setShowPassword(!showPassword)}
                                                 />
                                             }
                                             className="gap-[0.88rem] rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
                                         />
+                                        {errors.password && <Heading as="p" className="!text-[1.00rem] !text-red-a700">{errors.password}</Heading>}
                                     </div>
-
-
                                     <div className="flex w-[48%] flex-col items-start gap-[0.50rem]">
                                         <Heading
                                             size="textmd"
@@ -241,7 +253,7 @@ export default function SignUp({ ...props }) {
                                         <Input
                                             color="white"
                                             size="sm"
-                                            type="password"
+                                            type={showConfirmPassword ? 'text' : 'password'}
                                             name="confirmPassword"
                                             value={formData.confirmPassword}
                                             onChange={handleChange}
@@ -255,13 +267,15 @@ export default function SignUp({ ...props }) {
                                             }
                                             suffix={
                                                 <Img
-                                                    src="images/img_eye_1_1.svg"
+                                                    src={showConfirmPassword ? "images/img_eye_1_1.svg" : "images/img_eye_1_2.svg"}
                                                     alt="Eye (1) 1"
-                                                    className="h-[1.13rem] w-[1.13rem]"
+                                                    className="h-[1.13rem] w-[1.13rem] cursor-pointer"
+                                                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                                                 />
                                             }
                                             className="gap-[0.88rem] rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
                                         />
+                                        {errors.confirmPassword && <Heading as="p" className="!text-[1.00rem] !text-red-a700">{errors.confirmPassword}</Heading>}
                                     </div>
                                 </div>
 
@@ -291,6 +305,7 @@ export default function SignUp({ ...props }) {
                                             }
                                             className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
                                         />
+                                        {errors.dob && <Heading as="p" className="!text-[1.00rem] !text-red-a700">{errors.dob}</Heading>}
                                     </div>
 
                                     <div className="flex w-[48%] flex-col items-start gap-[0.50rem]">
@@ -311,8 +326,8 @@ export default function SignUp({ ...props }) {
                                             <option value="" disabled selected hidden>Register as</option>
                                             <option value="student">Student</option>
                                             <option value="teacher">Teacher</option>
-                                            <option value="admin">Admin</option>
                                         </select>
+                                        {errors.role && <Heading as="p" className="!text-[1.00rem] !text-red-a700">{errors.role}</Heading>}
                                     </div>
                                 </div>
 
@@ -332,15 +347,15 @@ export default function SignUp({ ...props }) {
                                         onChange={handleFileChange}
                                         className="gap-[0.88rem]  self-stretch justify-item item-center rounded-[10px] border border-solid border-gray-300 px-3 py-2"
                                     />
+                                    {errors.avatar && <Heading as="p" className="!text-[1.00rem] !text-red-a700">{errors.avatar}</Heading>}
                                 </div>
                                 
 
 
                                 <Button
                                     size="md"
-                                    onClick={handleSubmit}
+                                    type="submit"
                                     className="min-w-[23.13rem] bg-[#00BEFF] ml-14 rounded-[10px] font-medium"
-                                    a href="/login"
                                 >
                                     Sign up
                                 </Button>
