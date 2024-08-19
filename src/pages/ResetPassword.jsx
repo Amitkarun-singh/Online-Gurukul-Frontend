@@ -17,21 +17,21 @@ const ResetPassword = () => {
 
     const [emailError, setEmailError] = useState('');
 
-    const handleLoginChange = (e) => {
+    const handleEmailChange = (e) => {
         setEmailData({ ...emailData, [e.target.name]: e.target.value });
         setEmailError('');
     };
 
-    const handleLoginSubmit = async (e) => {
+    const handleEmailSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post('/api/v1/users/generate-otp', emailData);
             if (response.data.success) {
                 toast.success(response.data.message);
-                navigate('/otp');
+                navigate('/enter-otp');
             }
         } catch (error) {
-            console.error('Login failed:', error.response?.data?.message || error.message);
+            console.error('OTP is not Generated:', error.response?.data?.message || error.message);
             if (error.response?.data?.message) {
                 if (error.response.data.message.includes('Username')) {
                     let userError = error.response.data.message
@@ -51,7 +51,16 @@ const ResetPassword = () => {
             <div className='container-xs flex justify-center px-[3.50rem] md:px-[1.25rem]'>
                 {/* reset password form section */}
                 <div className='w-[44%] rounded-[10px] border border-solid border-blue_gray-100_01 bg-white-a700 px-[1.88rem] py-[2.38rem] md:w-full sm:p-[1.25rem]'>
-                    <div className='flex flex-col gap-[1.38em]'>
+                    <div className='flex flex-col gap-[1.38rem]'>
+                        <a href="/login" className="self-start">
+                            <div>
+                                <Img
+                                    src="images/img_backarrow_1_1.svg"
+                                    alt="Lock,pad,lock,safe,security,protected,lock Alt, / 24 / Outline"
+                                    className="h-[1.13rem] w-[1.13rem]"
+                                />
+                            </div>
+                        </a>
                         {/* reset password instruction section */}
                         <div className='flex flex-col gap-[1.88rem]'>
                             {/* email input section */}
@@ -68,7 +77,7 @@ const ResetPassword = () => {
                                         </Heading>
                                     </div>
                                 </div>
-                                <form onSubmit={handleLoginSubmit} className="flex flex-col items-end gap-[1.88rem]">
+                                <form onSubmit={handleEmailSubmit} className="flex flex-col items-end gap-[1.88rem]">
                                         {/* email input section */}
                                         <div className="flex flex-col items-start gap-[1.25rem] self-stretch">
                                             <div className="flex flex-col items-start gap-[0.50rem] w-full">
@@ -81,7 +90,7 @@ const ResetPassword = () => {
                                                     type="text"
                                                     name="text"
                                                     placeholder="user@example.com"
-                                                    onChange={handleLoginChange}
+                                                    onChange={handleEmailChange}
                                                     prefix={
                                                         <Img
                                                             src="images/img_message_24_outline.svg"
