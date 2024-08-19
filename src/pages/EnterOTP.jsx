@@ -1,0 +1,79 @@
+import React from 'react'
+import { Heading } from '../components/Heading';
+import { Button } from '../components/Button';
+import { Input } from '../components/Input';
+import { Img } from '../components/Img';
+import OTPInput from 'react-otp-input';
+
+const EnterOTP = () => {
+    return (
+        <div className='w-full h-full flex justify-center items-center'>
+            {/* reset password content section */}
+            <div className='container-xs flex justify-center px-[3.50rem] md:px-[1.25rem]'>
+                {/* reset password form section */}
+                <div className='w-[44%] rounded-[10px] border border-solid border-blue_gray-100_01 bg-white-a700 px-[1.88rem] py-[2.38rem] md:w-full sm:p-[1.25rem]'>
+                    <div className='flex flex-col gap-[1.38em]'>
+                        {/* reset password instruction section */}
+                        <div className='flex flex-col gap-[1.88rem]'>
+                            {/* email input section */}
+                            <div className='flex flex-col gap-[1.38rem]'>
+                                {/* reset instruction text section */}
+                                <div className='flex flex-col gap-[0.50rem]'>
+                                    {/* reset header section */}
+                                    <div className='flex flex-col items-start justify-center gap-[1.25rem] px-auto'>
+                                        <Heading  as="h1" className='!text-black-900_cc text-3xl font-bold font-inter'>
+                                            Enter OTP
+                                        </Heading>
+                                        <Heading as="p" className='!text-gray-600'>
+                                            Please check your mail, We sent an OTP code
+                                        </Heading>
+                                    </div>
+                                </div>
+                                <form className="flex flex-col items-end gap-[1.88rem]">
+                                        {/* otp input section  */}
+                                        <div className="flex flex-col items-start gap-[1.25rem] self-stretch">
+                                            <div className="flex flex-col items-start gap-[0.50rem] w-full">
+                                                <OTPInput
+                                                    numInputs={6}
+                                                    inputStyle="flex items-center justify-center cursor-text h-[3.75rem] w-[3.75rem] text-gray-500_01 border-red-500 border border-solid text-center rounded-[10px]"
+                                                    containerStyle="flex w-auto gap-[0.75rem]"
+                                                    renderInput={({ className, ...inputProps }, i) => (
+                                                        <label
+                                                            className="className flex h-[3.75rem] w-[3.75rem] cursor-text items-center justify-center rounded-[10px] border border-solid border-gray-500_01 text-center text-gray-900_1"
+                                                            key={i}
+                                                        >
+                                                            <input {...inputProps} />
+                                                        </label>
+                                                    )}
+                                                />
+                                            </div>
+                                        </div>
+                                        {/* signin button section */}
+                                        <Button size="md" type="submit" className="w-full rounded-[10px] font-medium">
+                                            Submit
+                                        </Button>
+                                </form>
+                                <div size="md" className="w-full flex justify-center items-center rounded-[10px] font-medium bg-white-a700 px-[2.13rem] text-[1.00rem] text-blue-300_01 border border-gray-500_01 h-[3.13rem] cursor-pointer">
+                                    Request OTP Again
+                                </div>
+                            </div>
+                        </div>
+                        {/* account creation prompt section */}
+                        <div className="mx-[3.88rem] flex flex-wrap justify-center md:mx-0 gap-1">
+                            <Heading as="h6" className="!text-[1.00rem]">
+                                Remember the Password?
+                            </Heading>
+                            <a href="/register" className="self-end">
+                                <Heading as="p" className="!text-[1.00rem] !text-[#00BEFF]">
+                                    Log in
+                                </Heading>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default EnterOTP
