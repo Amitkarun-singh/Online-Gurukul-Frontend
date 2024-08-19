@@ -1,10 +1,50 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Heading } from '../components/Heading';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
-import { Img } from '../components/Img'
+import { Img } from '../components/Img';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ResetPassword = () => {
+
+    const navigate = useNavigate();
+    const [emailData, setEmailData] = useState({
+        text: '',
+    });
+
+    const [emailError, setEmailError] = useState('');
+
+    const handleLoginChange = (e) => {
+        setEmailData({ ...emailData, [e.target.name]: e.target.value });
+        setEmailError('');
+    };
+
+    const handleLoginSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('/api/v1/users/generate-otp', emailData);
+            if (response.data.success) {
+                toast.success(response.data.message);
+                navigate('/otp');
+            }
+        } catch (error) {
+            console.error('Login failed:', error.response?.data?.message || error.message);
+            if (error.response?.data?.message) {
+                if (error.response.data.message.includes('Username')) {
+                    let userError = error.response.data.message
+                    setEmailError(userError);
+                }else{
+                    toast.error(error.response?.data?.message || error.message);
+                    setEmailError('');
+                }
+            }
+            
+        }
+    };
+
     return (
         <div className='w-full h-full flex justify-center items-center'>
             {/* reset password content section */}
@@ -28,7 +68,7 @@ const ResetPassword = () => {
                                         </Heading>
                                     </div>
                                 </div>
-                                <form className="flex flex-col items-end gap-[1.88rem]">
+                                <form onSubmit={handleLoginSubmit} className="flex flex-col items-end gap-[1.88rem]">
                                         {/* email input section */}
                                         <div className="flex flex-col items-start gap-[1.25rem] self-stretch">
                                             <div className="flex flex-col items-start gap-[0.50rem] w-full">
@@ -41,6 +81,7 @@ const ResetPassword = () => {
                                                     type="text"
                                                     name="text"
                                                     placeholder="user@example.com"
+                                                    onChange={handleLoginChange}
                                                     prefix={
                                                         <Img
                                                             src="images/img_message_24_outline.svg"
@@ -50,6 +91,7 @@ const ResetPassword = () => {
                                                     }
                                                     className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
                                                 />
+                                                {emailError && <Heading as="p" className="!text-[1.00rem] !text-red-a700">{emailError}</Heading>}
                                             </div>
                                         </div>
                                         {/* signin button section */}
@@ -57,9 +99,11 @@ const ResetPassword = () => {
                                             Submit
                                         </Button>
                                 </form>
-                                <div size="md" className="w-full flex justify-center items-center rounded-[10px] font-medium bg-white-a700 px-[2.13rem] text-[1.00rem] text-blue-300_01 border border-gray-500_01 h-[3.13rem] cursor-pointer">
-                                    Return to sign in
-                                </div>
+                                <a href='/login' className='w-full'>
+                                    <div size="md" className="w-full flex justify-center items-center rounded-[10px] font-medium bg-white-a700 px-[2.13rem] text-[1.00rem] text-blue-300_01 border border-gray-500_01 h-[3.13rem] cursor-pointer">
+                                        Return to sign in
+                                    </div>
+                                </a>
                             </div>
                         </div>
                         {/* account creation prompt section */}
