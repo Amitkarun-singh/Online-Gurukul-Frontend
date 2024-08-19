@@ -1,11 +1,67 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Heading } from '../components/Heading';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { Img } from '../components/Img';
-import OTPInput from 'react-otp-input';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const EnterOTP = () => {
+    const navigate = useNavigate();
+    const [otp, setOTP] = useState({
+        otp: '',
+    });
+
+    const [otpError, setOTPError] = useState('');
+
+    const handleOTPChange = (e) => {
+        setOTP({ ...setOTP, [e.target.name]: e.target.value });
+        setOTPError('');
+    };
+
+    const handleOTPSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            if (otp.length < 6) {
+                setOTPError('OTP must be 6 characters long');
+                return;
+            }
+            const response = await axios.post('/api/v1/users/verify-otp', otp);
+            if (response.data.success) {
+                toast.success(response.data.message);
+                navigate('/change-password');
+            }
+        } catch (error) {
+            console.error('OTP is not correct:', error.response?.data?.message || error.message);
+            if (error.response?.data?.message) {
+                if (error.response.data.message.includes('OTP')) {
+                    let userError = error.response.data.message
+                    setOTPError(userError);
+                }else{
+                    toast.error(error.response?.data?.message || error.message);
+                    setOTPError('');
+                }
+            }
+            
+        }
+    };
+    const handleResendOTP = async (e) => {
+        try {
+            const response = await axios.post('/api/v1/users/resend-otp', {}, {withCredentials: true, });
+            if (response.data.success) {
+                toast.success(response.data.message);
+            }
+        } catch (error) {
+            console.error('Resend OTP failed:', error.response?.data?.message || error.message);
+            if (error.response?.data?.message) {
+                toast.error(error.response?.data?.message || error.message);
+            }
+            
+        }
+    };
+
     return (
         <div className='w-full h-full flex justify-center items-center'>
             {/* reset password content section */}
@@ -18,6 +74,15 @@ const EnterOTP = () => {
                             {/* email input section */}
                             <div className='flex flex-col gap-[1.38rem]'>
                                 {/* reset instruction text section */}
+                                <a href="/reset-password" className="self-start">
+                                    <div>
+                                        <Img
+                                            src="images/img_backarrow_1_1.svg"
+                                            alt="Lock,pad,lock,safe,security,protected,lock Alt, / 24 / Outline"
+                                            className="h-[1.13rem] w-[1.13rem]"
+                                        />
+                                    </div>
+                                </a>
                                 <div className='flex flex-col gap-[0.50rem]'>
                                     {/* reset header section */}
                                     <div className='flex flex-col items-start justify-center gap-[1.25rem] px-auto'>
@@ -29,23 +94,28 @@ const EnterOTP = () => {
                                         </Heading>
                                     </div>
                                 </div>
-                                <form className="flex flex-col items-end gap-[1.88rem]">
+                                <form onSubmit={handleOTPSubmit} className="flex flex-col items-end gap-[1.88rem]">
                                         {/* otp input section  */}
                                         <div className="flex flex-col items-start gap-[1.25rem] self-stretch">
                                             <div className="flex flex-col items-start gap-[0.50rem] w-full">
-                                                <OTPInput
-                                                    numInputs={6}
-                                                    inputStyle="flex items-center justify-center cursor-text h-[3.75rem] w-[3.75rem] text-gray-500_01 border-red-500 border border-solid text-center rounded-[10px]"
-                                                    containerStyle="flex w-auto gap-[0.75rem]"
-                                                    renderInput={({ className, ...inputProps }, i) => (
-                                                        <label
-                                                            className="className flex h-[3.75rem] w-[3.75rem] cursor-text items-center justify-center rounded-[10px] border border-solid border-gray-500_01 text-center text-gray-900_1"
-                                                            key={i}
-                                                        >
-                                                            <input {...inputProps} />
-                                                        </label>
-                                                    )}
-                                                />
+                                            <Input
+                                                color="white_A700"
+                                                size="sm"
+                                                type="text"
+                                                maxLength={6}
+                                                name="otp"
+                                                onChange={handleOTPChange}
+                                                placeholder="******" 
+                                                prefix={
+                                                    <Img
+                                                        src="images/img_lockpad_locksafesecurityprotectedlock_alt_24_outline.svg"
+                                                        alt="Lock,pad,lock,safe,security,protected,lock Alt, / 24 / Outline"
+                                                        className="h-[1.13rem] w-[1.13rem]"
+                                                    />
+                                                }
+                                                className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
+                                            />
+                                                {otpError && <Heading as="p" className="!text-[1.00rem] !text-red-a700">{otpError}</Heading>}
                                             </div>
                                         </div>
                                         {/* signin button section */}
@@ -53,7 +123,7 @@ const EnterOTP = () => {
                                             Submit
                                         </Button>
                                 </form>
-                                <div size="md" className="w-full flex justify-center items-center rounded-[10px] font-medium bg-white-a700 px-[2.13rem] text-[1.00rem] text-blue-300_01 border border-gray-500_01 h-[3.13rem] cursor-pointer">
+                                <div onClick={handleResendOTP} size="md" className="w-full flex justify-center items-center rounded-[10px] font-medium bg-white-a700 px-[2.13rem] text-[1.00rem] text-blue-300_01 border border-gray-500_01 h-[3.13rem] cursor-pointer">
                                     Request OTP Again
                                 </div>
                             </div>
@@ -63,7 +133,7 @@ const EnterOTP = () => {
                             <Heading as="h6" className="!text-[1.00rem]">
                                 Remember the Password?
                             </Heading>
-                            <a href="/register" className="self-end">
+                            <a href="/login" className="self-end">
                                 <Heading as="p" className="!text-[1.00rem] !text-[#00BEFF]">
                                     Log in
                                 </Heading>
