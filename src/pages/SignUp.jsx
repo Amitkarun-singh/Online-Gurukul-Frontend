@@ -74,7 +74,7 @@ export default function SignUp({ ...props }) {
     return (
         <div {...props} className="min-w-[80.00rem] bg-blue-300_01 bg-opacity-25">
             {/* header section */}
-            <ToastContainer />
+            {/* <ToastContainer /> */}
             <div className="container-xs flex min-w-[80.00rem] justify-center px-[3.50rem] md:px-[1.25rem]">
                 {/* logo slider section */}
                 <div className="flex w-[95%] items-center justify-around gap-[2.00rem] rounded-[14px] bg-white-a700 my-[2.00rem] px-[3.50rem] py-[4.88rem] md:w-full md:flex-col md:p-[1.25rem]">
