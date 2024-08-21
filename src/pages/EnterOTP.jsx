@@ -63,7 +63,7 @@ const EnterOTP = () => {
     };
 
     return (
-        <div className='w-full h-full flex justify-center items-center'>
+        <div className='w-full h-[100vh] flex justify-center items-center'>
             {/* reset password content section */}
             <div className='container-xs flex justify-center px-[3.50rem] md:px-[1.25rem]'>
                 {/* reset password form section */}

@@ -33,7 +33,7 @@ export default function LogIn({ ...props }) {
             const response = await axios.post('/api/v1/users/login', loginData);
             if (response.data.success) {
                 toast.success(response.data.message);
-                navigate('/register');
+                navigate('/');
             }
         } catch (error) {
             console.error('Login failed:', error.response?.data?.message || error.message);
@@ -57,7 +57,7 @@ export default function LogIn({ ...props }) {
     };
 
     return (
-        <div {...props} className="h-full flex justify-center items-center">
+        <div {...props} className="h-[100vh] flex justify-center items-center">
             {/* header section */}
             <div className="container-xs flex min-w-[80.00rem] justify-center px-[3.50rem] md:px-[1.25rem] sm:min-w-[20.00rem] md:min-w-[30.00rem]">
                 {/* logo and slider section */}

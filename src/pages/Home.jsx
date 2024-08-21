@@ -16,7 +16,7 @@ const Home = () => {
         <div className="flex h-screen overflow-hidden">
             {/* Sidebar */}
             <div
-                className={`fixed top-16 left-0 h-[calc(100%-3rem)] bg-white text-white transition-all duration-300 z-20 border border-gray-300 ${
+                className={`fixed top-16 left-0 h-[calc(100%-3rem)] bg-white-a700 text-white transition-all duration-300 z-20 border border-gray-300 ${
                     sidebarOpen ? 'w-64' : 'w-16'
                 }`}
                 onMouseEnter={() => setSidebarOpen(true)}
@@ -86,11 +86,11 @@ const Home = () => {
                 }`}
             >
                 {/* Navbar */}
-                <div className="fixed top-0 left-0 w-full h-[4.00rem] pl-[1.50rem] bg-white bg-opacity-25 flex items-center justify-between px-4 z-10 border border-gray-300">
+                <div className="fixed top-0 left-0 w-full h-[4.00rem] pl-[1.50rem] bg-white-a700 flex items-center justify-between px-4 z-10 border border-gray-300">
                     <div className="flex items-center">
                         <button onClick={toggleSidebar} className="p-0.5 focus:outline-none ml-0">
                             <img
-                                src={sidebarOpen ? "../images/hamburger-cross-menu.svg" : "../images/hamburger-menu.svg"}
+                                src="../images/hamburger-menu.svg"
                                 alt="Menu"
                                 className="w-6 h-6"
                             />

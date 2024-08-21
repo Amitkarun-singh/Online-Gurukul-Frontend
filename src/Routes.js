@@ -11,7 +11,7 @@ const ProjectRoutes = () => {
     let element = useRoutes([
         { path: "/login", element: <LogIn/>},
         { path: "/register", element: <SignUp /> },
-        { path: "/home", element: <Home /> }
+        { path: "/", element: <Home /> },
         { path: "/reset-password", element : <ResetPassword/>},
         { path: "/enter-otp", element : <EnterOTP/>},
         { path: "/change-password", element : <ChangePassword/>}

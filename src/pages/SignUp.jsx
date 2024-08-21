@@ -6,7 +6,7 @@ import { Input } from "../components/Input";
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function SignUp({ ...props }) {
@@ -72,10 +72,10 @@ export default function SignUp({ ...props }) {
 
 
     return (
-        <div {...props} className="min-w-[80.00rem] bg-blue-300_01 bg-opacity-25">
+        <div {...props} className="h-full flex justify-center items-center">
             {/* header section */}
             {/* <ToastContainer /> */}
-            <div className="container-xs flex min-w-[80.00rem] justify-center px-[3.50rem] md:px-[1.25rem]">
+            <div className="container-xs flex min-w-[80.00rem] justify-center px-[3.50rem] md:px-[1.25rem] sm:min-w-[20.00rem] md:min-w-[30.00rem]">
                 {/* logo slider section */}
                 <div className="flex w-[95%] items-center justify-around gap-[2.00rem] rounded-[14px] bg-white-a700 my-[2.00rem] px-[3.50rem] py-[4.88rem] md:w-full md:flex-col md:p-[1.25rem]">
                     {/* navigation settings section */}
