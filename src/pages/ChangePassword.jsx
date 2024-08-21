@@ -33,7 +33,7 @@ const ChangePassword = () => {
             const response = await axios.post('/api/v1/users/reset-password', newPasswordData);
             if (response.data.success) {
                 toast.success(response.data.message);
-                navigate('/');
+                navigate('/login');
             }
         } catch (error) {
             console.error('OTP is not Generated:', error.response?.data?.message || error.message);
@@ -55,7 +55,7 @@ const ChangePassword = () => {
     };
 
     return (
-        <div className='w-full h-full flex justify-center items-center'>
+        <div className='w-full h-[100vh] flex justify-center items-center'>
             {/* reset password content section */}
             <div className='container-xs flex justify-center px-[3.50rem] md:px-[1.25rem]'>
                 {/* reset password form section */}
