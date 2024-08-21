@@ -128,7 +128,7 @@ export default function SignUp({ ...props }) {
                         {/* signup form inputs section */}
                         <form onSubmit={handleSubmit} className="flex flex-col items-end gap-[1.88rem]">
                             <div className="flex flex-col items-start gap-[1.25rem] self-stretch">
-                                <div className="flex w-[80%] flex-col items-start gap-[0.50rem] w-full">
+                                <div className="flex  flex-col items-start gap-[0.50rem] w-full">
                                     <Heading
                                         size="textmd"
                                         as="h3"
@@ -155,7 +155,7 @@ export default function SignUp({ ...props }) {
                                     />
                                     {errors.fullName && <Heading as="p" className="!text-[1.00rem] !text-red-a700">{errors.fullName}</Heading>}
                                 </div>
-                                <div className="flex w-[80%] flex-col items-start gap-[0.50rem] w-full">
+                                <div className="flex  flex-col items-start gap-[0.50rem] w-full">
                                     <Heading
                                         size="textmd"
                                         as="h4"
@@ -182,7 +182,7 @@ export default function SignUp({ ...props }) {
                                     />
                                     {errors.username && <Heading as="p" className="!text-[1.00rem] !text-red-a700">{errors.username}</Heading>}
                                 </div>
-                                <div className="flex w-[80%] flex-col items-start gap-[0.50rem] w-full">
+                                <div className="flex flex-col items-start gap-[0.50rem] w-full">
                                     <Heading
                                         size="textmd"
                                         as="h3"
@@ -331,7 +331,7 @@ export default function SignUp({ ...props }) {
                                     </div>
                                 </div>
 
-                                <div className="flex w-[80%] flex-col items-start gap-[0.50rem] w-full">
+                                <div className="flex flex-col items-start gap-[0.50rem] w-full">
                                     <Heading
                                         size="textmd"
                                         as="h5"
