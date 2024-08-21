@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import ProjectRoutes from "./Routes";
-import Card from './components/Card';
+import {Card} from './components/Card/card.jsx';
 
 function App() {
   return (

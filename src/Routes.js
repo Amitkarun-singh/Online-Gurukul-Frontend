@@ -8,16 +8,16 @@ import ResetPassword from "./pages/ResetPassword";
 import ChangePassword from "./pages/ChangePassword";
 
 const ProjectRoutes = () => {
-    let element = useRoutes([
-        { path: "/login", element: <LogIn/>},
-        { path: "/register", element: <SignUp /> },
-        { path: "/", element: <Home /> },
-        { path: "/reset-password", element : <ResetPassword/>},
-        { path: "/enter-otp", element : <EnterOTP/>},
-        { path: "/change-password", element : <ChangePassword/>}
-    ]);
+        let element = useRoutes([
+                { path: "/login", element: <LogIn/>},
+                { path: "/register", element: <SignUp /> },
+                { path: "/", element: <Home /> },
+                { path: "/reset-password", element : <ResetPassword/>},
+                { path: "/enter-otp", element : <EnterOTP/>},
+                { path: "/change-password", element : <ChangePassword/>}
+        ]);
 
-    return element;
+        return element;
 };
 
 export default ProjectRoutes;
