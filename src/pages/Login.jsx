@@ -31,6 +31,8 @@ export default function LogIn({ ...props }) {
         e.preventDefault();
         try {
             const response = await axios.post('/api/v1/users/login', loginData);
+            console.log(response);
+            
             if (response.data.success) {
                 toast.success(response.data.message);
                 navigate('/');
