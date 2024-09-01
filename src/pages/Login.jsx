@@ -8,11 +8,16 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { login } from '../features/authSlice';
+
+
 
 export default function LogIn({ ...props }) {
     const [sliderState, setSliderState] = useState(0);
     const sliderRef = React.useRef(null);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [loginData, setLoginData] = useState({
         text: '',
         password: '',
@@ -20,6 +25,7 @@ export default function LogIn({ ...props }) {
     const [showPassword, setShowPassword] = useState(false);
     const [usernameError, setUsernameError] = useState('');
     const [passwordError, setPasswordError] = useState('');
+    
 
     const handleLoginChange = (e) => {
         setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -33,6 +39,8 @@ export default function LogIn({ ...props }) {
             const response = await axios.post('/api/v1/users/login', loginData);
             if (response.data.success) {
                 toast.success(response.data.message);
+                console.log(response.data.data.user);
+                dispatch(login(response.data.data.user)); // Dispatch login action with user data
                 navigate('/');
             }
         } catch (error) {

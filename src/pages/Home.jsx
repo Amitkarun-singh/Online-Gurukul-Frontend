@@ -1,12 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Input } from "../components/Input";
 import { Img } from "../components/Img";
 import { CloseSVG } from "../components/Input/close";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCurrentUser } from '../features/authSlice';
+
 
 const Home = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [searchBarValue, setSearchBarValue] = React.useState("");
+    const [currentUser, setCurrentUser] = useState(null);
+    const dispatch = useDispatch();
+    const { user, loading, error } = useSelector((state) => state.auth);
 
+
+    useEffect(() => {
+        
+        dispatch(fetchCurrentUser());
+        setCurrentUser(user);
+        console.log(user?.fullName);
+    }, []);
+    
+    console.log(currentUser);
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
@@ -102,8 +119,8 @@ const Home = () => {
                                 className="h-[3.38rem] w-[10.25rem] object-contain"
                             />
                         </div>
-                      </div>
-                    <div className="flex items-center gap-4">
+                    </div>
+                    <div>
                         <Input
                             color="gray_100_03"
                             name="Search Field"
@@ -113,11 +130,13 @@ const Home = () => {
                             prefix={<Img src="images/img_search_blue_gray_400.svg" alt="Search" className="h-[1.25rem] w-[1.25rem]" />}
                             suffix={
                                 searchBarValue?.length > 0 ? (
-                                <CloseSVG onClick={() => setSearchBarValue("")} fillColor="#888ea2ff" />
+                                    <CloseSVG onClick={() => setSearchBarValue("")} fillColor="#888ea2ff" />
                                 ) : null
                             }
-                            className="flex-grow gap-[0.88rem] rounded-full !rounded-full text-[#888ea2] border border-gray-300"
+                            className="flex-grow gap-[0.88rem] !rounded-full text-[#888ea2] border border-gray-300"
                         />
+                    </div>
+                    <div className="flex items-center gap-4">
                         <button className="text-gray-700 focus:outline-none">
                             <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
                                 <img
@@ -128,10 +147,13 @@ const Home = () => {
                                 <i className="fas fa-user-circle text-2xl text-gray-700"></i>
                             </div>
                         </button>
+                        <div className="text-gray-700">
+                            <span className="text-sm font-medium">{currentUser?.fullName}</span>
+                        </div>
                         <button className="text-gray-700 focus:outline-none">
                             <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
                                 <img
-                                    src="Images/logo_image.png"
+                                    src={currentUser?.avatar}
                                     alt="Header Logo"
                                     className="h-[3.38rem] w-[10.25rem] object-contain"
                                 />
