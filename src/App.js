@@ -4,7 +4,7 @@ import ProjectRoutes from "./Routes";
 
 function App() {
   return (
-    <div className='bg-blue-300_01 bg-opacity-60 w-[100%] h-[100%]'>
+    <div className='bg-blue-400_01 bg-opacity-65 w-[100%] h-[100%]'>
       <Router>
         <ProjectRoutes/>
       </Router>

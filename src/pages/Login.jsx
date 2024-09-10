@@ -104,7 +104,7 @@ export default function LogIn({ ...props }) {
                             {/* signin options section */}
                             <div className="flex flex-col items-center gap-[1.25rem]">
                                 <div className="flex flex-col items-end gap-[0.25rem]">
-                                    <Heading size="textlg" as="h2" className="!text-blue-300_01">
+                                    <Heading size="textlg" as="h2" className="!text-blue-400_01">
                                         Welcome back!
                                     </Heading>
                                 </div>

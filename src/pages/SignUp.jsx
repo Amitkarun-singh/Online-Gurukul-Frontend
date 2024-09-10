@@ -74,7 +74,6 @@ export default function SignUp({ ...props }) {
     return (
         <div {...props} className="h-full flex justify-center items-center">
             {/* header section */}
-            {/* <ToastContainer /> */}
             <div className="container-xs flex min-w-[80.00rem] justify-center px-[3.50rem] md:px-[1.25rem] sm:min-w-[20.00rem] md:min-w-[30.00rem]">
                 {/* logo slider section */}
                 <div className="flex w-[95%] items-center justify-around gap-[2.00rem] rounded-[14px] bg-white-a700 my-[2.00rem] px-[3.50rem] py-[4.88rem] md:w-full md:flex-col md:p-[1.25rem]">
@@ -121,7 +120,7 @@ export default function SignUp({ ...props }) {
                     <div className="flex w-full flex-col gap-[1.50rem] sm:w-full">
                         <div className="flex flex-col items-center gap-[1.25rem]">
                             <div className="flex flex-col items-end gap-[0.25rem]">
-                                    <Heading size="textlg" as="h2" className="!text-blue-300_01">
+                                    <Heading size="textlg" as="h2" className="!text-blue-400_01">
                                         Enter your details!
                                     </Heading>
                             </div>
@@ -373,7 +372,7 @@ export default function SignUp({ ...props }) {
                                 </Heading>
                                 </a>
                                 <a href="/login" className="self-end">
-                                <Heading as="p" className="!text-[1.00rem] !text-[#00BEFF]">
+                                <Heading as="p" className="!text-[1.00rem] !text-blue-400_01">
                                     Sign In
                                 </Heading>
                                 </a>

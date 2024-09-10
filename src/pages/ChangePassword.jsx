@@ -148,7 +148,7 @@ const ChangePassword = () => {
                                 Remember the Password?
                             </Heading>
                             <a href="/login" className="self-end">
-                                <Heading as="p" className="!text-[1.00rem] !text-[#00BEFF]">
+                                <Heading as="p" className="!text-[1.00rem] !text-blue-400_01">
                                     Log in
                                 </Heading>
                             </a>
