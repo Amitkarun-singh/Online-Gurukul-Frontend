@@ -11,8 +11,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
 import { login } from '../features/authSlice';
 
-
-
 export default function LogIn({ ...props }) {
     const [sliderState, setSliderState] = useState(0);
     const sliderRef = React.useRef(null);
@@ -25,7 +23,6 @@ export default function LogIn({ ...props }) {
     const [showPassword, setShowPassword] = useState(false);
     const [usernameError, setUsernameError] = useState('');
     const [passwordError, setPasswordError] = useState('');
-    
 
     const handleLoginChange = (e) => {
         setLoginData({ ...loginData, [e.target.name]: e.target.value });
@@ -47,22 +44,22 @@ export default function LogIn({ ...props }) {
             console.error('Login failed:', error.response?.data?.message || error.message);
             if (error.response?.data?.message) {
                 if (error.response.data.message.includes('username')) {
-                    let userError = error.response.data.message
+                    let userError = error.response.data.message;
                     setUsernameError(userError);
                     setPasswordError('');
                 } else if (error.response.data.message.includes('password')) {
-                    let passwordError = error.response.data.message
+                    let passwordError = error.response.data.message;
                     setUsernameError('');
                     setPasswordError(passwordError);
-                }else{
+                } else {
                     toast.error(error.response?.data?.message || error.message);
                     setUsernameError('');
                     setPasswordError('');
                 }
             }
-            
         }
     };
+
 
     return (
         <div {...props} className="h-[100vh] flex justify-center items-center">

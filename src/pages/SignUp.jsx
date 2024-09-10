@@ -8,20 +8,22 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useSelector } from "react-redux";
 
 export default function SignUp({ ...props }) {
     const [sliderState, setSliderState] = React.useState(0);
     const navigate = useNavigate();
     const sliderRef = React.useRef(null);
+    const { fullName, avatar } = useSelector((state) => state.auth.user);
     const [formData, setFormData] = useState({
-        fullName: '',
+        fullName: fullName || '',
         email: '',
         username: '',
         password: '',
         confirmPassword: '',
         dob: '',
         role: '',
-        avatar: null,
+        avatar: avatar || null,
     });
     const [showPassword, setShowPassword] = useState(false);
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -69,6 +71,7 @@ export default function SignUp({ ...props }) {
             }
         }
     };
+
 
 
     return (

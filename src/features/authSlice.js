@@ -46,7 +46,6 @@ const authSlice = createSlice({
 
 export const { login, logout } = authSlice.actions;
 export default authSlice.reducer;
-
 //i want to display the name and avatar of the user in the header of the home page
 //i have already created the authSlice.js file in the features folder
 //i have also created the store.js file in the app folder

@@ -5,29 +5,24 @@ import { CloseSVG } from "../components/Input/close";
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCurrentUser } from '../features/authSlice';
 
-
 const Home = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [searchBarValue, setSearchBarValue] = React.useState("");
-    const [currentUser, setCurrentUser] = useState(null);
+    const [searchBarValue, setSearchBarValue] = useState("");
     const dispatch = useDispatch();
     const { user, loading, error } = useSelector((state) => state.auth);
 
-
     useEffect(() => {
-        
+        console.log(user);
         dispatch(fetchCurrentUser());
-        setCurrentUser(user);
-        console.log(user?.fullName);
     }, []);
-    
-    console.log(currentUser);
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
     };
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
 
     return (
         <div className="flex h-screen overflow-hidden">
@@ -122,7 +117,7 @@ const Home = () => {
                     </div>
                     <div>
                         <Input
-                            color="gray_100_03"
+                            color="white_A700_33"
                             name="Search Field"
                             placeholder={`Search for something`}
                             value={searchBarValue}
@@ -148,12 +143,12 @@ const Home = () => {
                             </div>
                         </button>
                         <div className="text-gray-700">
-                            <span className="text-sm font-medium">{currentUser?.fullName}</span>
+                            <span className="text-sm font-medium">{user?.fullName}</span>
                         </div>
                         <button className="text-gray-700 focus:outline-none">
                             <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center">
                                 <img
-                                    src={currentUser?.avatar}
+                                    src={user?.avatar}
                                     alt="Header Logo"
                                     className="h-[3.38rem] w-[10.25rem] object-contain"
                                 />
