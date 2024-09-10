@@ -69,6 +69,9 @@ const JoinClassroom = ({ setJoinModalOpen, closeModal}) => {
                                                 <Heading size="textmd" as="h3" className="mt-[0.25rem] !text-gray-900">
                                                     Classroom Code
                                                 </Heading>
+                                                <Heading size="textmd" as="h3" className="mt-[0.25rem] !text-gray-900">
+                                                    Ask your teacher for the class code, then enter it here.
+                                                </Heading>
                                                 <Input
                                                     color="white_A700"
                                                     size="sm"
