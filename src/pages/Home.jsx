@@ -11,10 +11,10 @@ const Home = () => {
     const dispatch = useDispatch();
     const { user, loading, error } = useSelector((state) => state.auth);
 
-    useEffect(() => {
-        console.log(user);
-        dispatch(fetchCurrentUser());
-    }, []);
+    // useEffect(() => {
+    //     console.log(user);
+    //     dispatch(fetchCurrentUser());
+    // }, []);
 
 
     const toggleSidebar = () => {
