@@ -25,6 +25,7 @@ const JoinClassroom = ({ setJoinModalOpen, closeModal}) => {
         try {
             const response = await axios.post('/api/v1/classrooms/join-classroom', classroomData);
             if (response.data.success) {
+                closeModal();
                 toast.success(response.data.message);
                 setJoinModalOpen(false)
             }

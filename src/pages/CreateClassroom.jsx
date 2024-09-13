@@ -4,13 +4,11 @@ import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { Img } from '../components/Img';
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const CreateClassroom = ({setCreateModalOpen, closeModal}) => {
 
-    const navigate = useNavigate();
     const [classroomData, setClassroomData] = useState({
         classroomName : '',
         classroomDesc : '',
@@ -33,8 +31,9 @@ const CreateClassroom = ({setCreateModalOpen, closeModal}) => {
         try {
             const response = await axios.post('/api/v1/classrooms/', classroomData);
             if (response.data.success) {
+                closeModal();
                 toast.success(response.data.message);
-                setCreateModalOpen(false)
+                setCreateModalOpen(false);
             }
         } catch (error) {
             console.error('OTP is not Generated:', error.response?.data?.message || error.message);
