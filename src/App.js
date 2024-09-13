@@ -9,7 +9,7 @@ function App() {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <div className='bg-blue-300_01 bg-opacity-25 w-[100%] h-[100%]'>
+        <div className='bg-blue-400_01 bg-opacity-65 w-[100%] h-[100%] min-h-screen min-w-full'>
           <Router>
             <ProjectRoutes />
           </Router>
