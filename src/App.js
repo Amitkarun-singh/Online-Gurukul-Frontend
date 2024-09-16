@@ -5,6 +5,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './app/store';
 import ProjectRoutes from './Routes';
 
+
 function App() {
   return (
     <Provider store={store}>
@@ -13,6 +14,7 @@ function App() {
           <Router>
             <ProjectRoutes />
           </Router>
+          
         </div>
       </PersistGate>
     </Provider>

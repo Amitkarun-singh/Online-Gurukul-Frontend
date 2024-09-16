@@ -10,9 +10,11 @@ const authSlice = createSlice({
   reducers: {
     login: (state, action) => {
       state.user = action.payload;
+      localStorage.setItem("Online-Gurukul-token", action.payload.token);
     },
     logout: (state) => {
       state.user = null;
+      localStorage.removeItem("Online-Gurukul-token");
     },
   },
 });
