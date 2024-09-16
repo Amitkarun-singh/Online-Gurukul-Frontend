@@ -1,20 +1,20 @@
 import React, { useEffect, useState, useRef} from 'react';
+import { Img } from "../components/Img";
+import { useSelector,  useDispatch } from 'react-redux';
 import { Card } from '../components/Card/card';
 import { Heading } from '../components/Heading';
-import axios from 'axios';
-import { Navbar } from '../components/Navbar';
-import { Sidebar } from '../components/Sidebar';
-import { Img } from '../components/Img';
 import CreateClassroom from './CreateClassroom';
 import JoinClassroom from './JoinClassroom';
+import { createModalOpen, createModalClose, joinModalOpen, joinModalClose} from '../Redux/Slices/classroomSlice';
 
-const Home = () => {
+const Home = ({sidebarOpen}) => {
 
     const [isBoxOpen, setBoxOpen] = useState(false);
     const [isCreateModalOpen, setCreateModalOpen] = useState(false); 
     const [isJoinModalOpen, setJoinModalOpen] = useState(false); 
     const modalRef = useRef(null);
     const boxRef = useRef(null);
+    const dispatch = useDispatch();
 
     const modalHandler = () => {
         setBoxOpen(true);
@@ -22,17 +22,21 @@ const Home = () => {
 
     const createHandler = () => {
         setCreateModalOpen(true);
+        dispatch(createModalOpen());
         setBoxOpen(false);
     };
 
     const joinHandler = () => {
         setJoinModalOpen(true);
+        dispatch(joinModalOpen());
         setBoxOpen(false);
     }
 
     const closeModal = () => {
         setCreateModalOpen(false);
         setJoinModalOpen(false);
+        dispatch(createModalClose()); // Close Create Modal via Redux
+        dispatch(joinModalClose());
         setBoxOpen(false);
     };
 
@@ -40,7 +44,6 @@ const Home = () => {
         setBoxOpen(false);
     };
 
-    // Close modal or box when clicking outside
     const handleClickOutside = (e) => {
         if (modalRef.current && !modalRef.current.contains(e.target)) {
             closeModal();
@@ -57,45 +60,17 @@ const Home = () => {
         };
     }, []);
 
-
-    const [sidebarOpen, setSidebarOpen] = useState(false);
-    const [classRooms, setClassRooms] = useState([]);
-    const [loading, setLoading] = useState(false);
-
-    async function fetchClassroomData() {
-        setLoading(true);
-        try {
-            const response = await axios.get('/api/v1/classrooms/');
-            const data = await response.data.data;
-            setClassRooms(data);
-        } catch (error) {
-            console.error(error);
-            setClassRooms([]);
-        }
-        setLoading(false);
-    }
-
-    useEffect(() => {
-        fetchClassroomData();
-    }, [isJoinModalOpen, isCreateModalOpen]);
-
-    const toggleSidebar = (isOpen) => {
-        setSidebarOpen(isOpen);
-    };
+    const {classRooms} = useSelector((state) => state.classRooms)
+    const [isloading, setLoading] = useState(false);
 
     return (
         <div className={`flex flex-col h-full overflow-hidden`}>
-            {/* Sidebar */}
-            <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-
-            {/* Navbar */}
-            <Navbar />
 
             {/* Main Content */}
             <div className={`flex flex-col transition-all duration-300 ${sidebarOpen ? 'ml-64' : 'ml-16'}`}>
                 {/* Content */}
                 <div className="flex-grow p-6 mt-16 overflow-y-auto">
-                    {loading ? (
+                    {isloading ? (
                         "Loading..."
                     ) : classRooms.length > 0 ? (
                         <div className={`grid gap-5 ${sidebarOpen ? 'grid-cols-3' : 'grid-cols-4'}`}>

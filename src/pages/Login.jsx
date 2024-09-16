@@ -8,13 +8,16 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from 'react-redux';
+import { login } from '../Redux/Slices/authSlice';
 
 export default function LogIn({ ...props }) {
     const [sliderState, setSliderState] = useState(0);
     const sliderRef = React.useRef(null);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [loginData, setLoginData] = useState({
-        text: '',
+        username: '',
         password: '',
     });
     const [showPassword, setShowPassword] = useState(false);
@@ -30,33 +33,34 @@ export default function LogIn({ ...props }) {
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/v1/users/login', loginData);
-            console.log(response);
+            const response = await axios.post('/api/v1/users/login', loginData, {withCredentials:true});
             
             if (response.data.success) {
                 toast.success(response.data.message);
+                console.log(response.data);
+                dispatch(login(response.data.data.user));
                 navigate('/');
             }
         } catch (error) {
             console.error('Login failed:', error.response?.data?.message || error.message);
             if (error.response?.data?.message) {
                 if (error.response.data.message.includes('username')) {
-                    let userError = error.response.data.message
+                    let userError = error.response.data.message;
                     setUsernameError(userError);
                     setPasswordError('');
                 } else if (error.response.data.message.includes('password')) {
-                    let passwordError = error.response.data.message
+                    let passwordError = error.response.data.message;
                     setUsernameError('');
                     setPasswordError(passwordError);
-                }else{
+                } else {
                     toast.error(error.response?.data?.message || error.message);
                     setUsernameError('');
                     setPasswordError('');
                 }
             }
-            
         }
     };
+
 
     return (
         <div {...props} className="h-[100vh] flex justify-center items-center">

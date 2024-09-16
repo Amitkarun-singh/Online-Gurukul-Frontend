@@ -108,7 +108,7 @@ const ResetPassword = () => {
                                             Submit
                                         </Button>
                                 </form>
-                                <a href='/login' className='w-full'>
+                                <a href='/' className='w-full'>
                                     <div size="md" className="w-full flex justify-center items-center rounded-[10px] font-medium bg-white-a700 px-[2.13rem] text-[1.00rem] text-blue-400_01 border border-gray-500_01 h-[3.13rem] cursor-pointer">
                                         Return to sign in
                                     </div>

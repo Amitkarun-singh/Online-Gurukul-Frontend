@@ -32,7 +32,7 @@ const Card = ({classRoom}) => {
                 <div className="bg-blue-200_01 w-16 h-16 rounded-md ml-5 flex justify-center items-center">
                   <h1 className='text-3xl font-black'>
                     {
-                      classRoom?.classroomName.charAt(0)
+                      classRoom?.classroomOwnerName.charAt(0)
                     }
                   </h1>
                 </div>
