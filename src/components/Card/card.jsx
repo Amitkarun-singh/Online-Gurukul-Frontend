@@ -28,12 +28,12 @@ const Card = ({ classRoom }) => {
                   {typeof classRoom?.classroomName === 'string' && classRoom.classroomName.length > 10
                     ? classRoom.classroomName.slice(0, 10) + "..."
                     : classRoom?.classroomName}
-                </Heading>
-              </div>
-              <div className="bg-blue-200_01 w-28 h-6 rounded-md ml-3 flex items-center p-2">
-                <Heading as='h2' className='text-black-900 text-[1.00rem] font-semibold'>
-                  {typeof classRoom?.classroomOwnerName === 'string' && classRoom?.classroomOwnerName.length > 20
-                    ? classRoom.classroomOwnerName.slice(0, 20) + "..."
+                  </Heading>
+                </div>
+                <div className="bg-blue-200_01 w-28 h-6 rounded-md ml-3 flex items-center p-2">
+                <Heading as='h2' className='text-black-900 text-[1.00rem] font-semibold' >
+                  {typeof classRoom?.classroomOwnerName === 'string' && classRoom?.classroomOwnerName.length > 8
+                    ? classRoom.classroomOwnerName.slice(0, 8) + "..."
                     : classRoom?.classroomOwnerName}
                 </Heading>
               </div>

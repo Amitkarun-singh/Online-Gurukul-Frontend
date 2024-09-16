@@ -1,23 +1,41 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react';
-import { store, persistor } from './app/store';
-import ProjectRoutes from './Routes';
+import {ProjectRoutes, AuthRoutes} from './Routes';
+import { useSelector } from "react-redux";
+import { Navbar } from './components/Navbar';
+import { Sidebar } from './components/Sidebar';
 
 
 function App() {
+  const { user, loading, error } = useSelector((state) => state.auth);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const toggleSidebar = (isOpen) => {
+    setSidebarOpen(isOpen);
+  };
+
+  console.log(user);
+  
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
         <div className='bg-blue-400_01 bg-opacity-65 w-[100%] h-[100%] min-h-screen min-w-full'>
           <Router>
-            <ProjectRoutes />
+            {
+              user? 
+              (
+                <>
+                  <Navbar user = {user}/>
+                  <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+                  <ProjectRoutes sidebarOpen={sidebarOpen}/>
+                </>
+              ) :
+              (
+                <>
+                  <AuthRoutes/>
+                </>
+              )
+            }
           </Router>
           
         </div>
-      </PersistGate>
-    </Provider>
   );
 }
 

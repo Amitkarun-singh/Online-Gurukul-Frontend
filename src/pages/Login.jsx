@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
-import { login } from '../features/authSlice';
+import { login } from '../Redux/Slices/authSlice';
 
 export default function LogIn({ ...props }) {
     const [sliderState, setSliderState] = useState(0);
@@ -33,13 +33,12 @@ export default function LogIn({ ...props }) {
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/v1/users/login', loginData);
-            console.log(response);
+            const response = await axios.post('/api/v1/users/login', loginData, {withCredentials:true});
             
             if (response.data.success) {
                 toast.success(response.data.message);
-                console.log(response.data.data.user);
-                dispatch(login(response.data.data.user)); // Dispatch login action with user data
+                console.log(response.data);
+                dispatch(login(response.data.data.user));
                 navigate('/');
             }
         } catch (error) {

@@ -8,18 +8,30 @@ import ResetPassword from "./pages/ResetPassword";
 import ChangePassword from "./pages/ChangePassword";
 import ClassManagement from "./pages/ClassManagement";
 
-const ProjectRoutes = () => {
+const ProjectRoutes = ({sidebarOpen}) => {
         let element = useRoutes([
-                { path: "/login", element: <LogIn/>},
-                { path: "/register", element: <SignUp /> },
-                { path: "/", element: <Home /> },
-                { path: "/reset-password", element : <ResetPassword/>},
-                { path: "/enter-otp", element : <EnterOTP/>},
-                { path: "/change-password", element : <ChangePassword/>},
+                // { path: "/login", element: <LogIn/>},
+                // { path: "/register", element: <SignUp /> },
+                { path: "/", element: <Home sidebarOpen={sidebarOpen}/> },
                 { path: "/class-management/:classRoomId", element: <ClassManagement /> },
+                // { path: "/reset-password", element : <ResetPassword/>},
+                // { path: "/enter-otp", element : <EnterOTP/>},
+                // { path: "/change-password", element : <ChangePassword/>}
         ]);
 
         return element;
 };
 
-export default ProjectRoutes;
+const AuthRoutes = () => {
+        let element = useRoutes([
+                { path: "/", element: <LogIn/>},
+                { path: "/register", element: <SignUp /> },
+                { path: "/reset-password", element : <ResetPassword/>},
+                { path: "/enter-otp", element : <EnterOTP/>},
+                { path: "/change-password", element : <ChangePassword/>},
+        ]);
+
+        return element;
+};
+
+export {ProjectRoutes, AuthRoutes};

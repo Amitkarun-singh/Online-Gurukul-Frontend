@@ -55,7 +55,7 @@ export default function SignUp({ ...props }) {
             });
             if (response.data.success) {
                 toast.success("User registered successfully");
-                navigate('/login');
+                navigate('/');
                 console.log(response);
             }
         } catch (error) {
@@ -366,12 +366,12 @@ export default function SignUp({ ...props }) {
                         {/* already have an account? */}
                         
                             <div className="mx-[0.50rem] flex flex-wrap justify-center md:mx-0">
-                               <a href="/login">
+                               <a href="/">
                                 <Heading as="h6" className="!text-[1.00rem]">
                                     Already have an account?
                                 </Heading>
                                 </a>
-                                <a href="/login" className="self-end">
+                                <a href="/" className="self-end">
                                 <Heading as="p" className="!text-[1.00rem] !text-blue-400_01">
                                     Sign In
                                 </Heading>
