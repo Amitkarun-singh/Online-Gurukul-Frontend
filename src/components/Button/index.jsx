@@ -11,10 +11,10 @@ const variants = {
     orange_200_01: "bg-orange-200_01 text-white-a700",
     white_a700: "bg-white-a700 text-gray-988",
     blue_50: "bg-red-50",
-    blue_300_01: "bg-blue-300_01 text-white-a700",
+    blue_300_01: "bg-blue-400_01 text-white-a700",
   },
   outline: {
-    blue_300_01: "border-blue-300_01 border border-solid text-blue-300_01",
+    blue_300_01: "border-blue-400_01 border border-solid text-blue-400_01",
   },
 };
 

@@ -7,11 +7,23 @@ import EnterOTP from "./pages/EnterOTP";
 import ResetPassword from "./pages/ResetPassword";
 import ChangePassword from "./pages/ChangePassword";
 
-const ProjectRoutes = () => {
+const ProjectRoutes = ({sidebarOpen}) => {
         let element = useRoutes([
-                { path: "/login", element: <LogIn/>},
+                // { path: "/login", element: <LogIn/>},
+                // { path: "/register", element: <SignUp /> },
+                { path: "/", element: <Home sidebarOpen={sidebarOpen}/> },
+                // { path: "/reset-password", element : <ResetPassword/>},
+                // { path: "/enter-otp", element : <EnterOTP/>},
+                // { path: "/change-password", element : <ChangePassword/>}
+        ]);
+
+        return element;
+};
+
+const AuthRoutes = () => {
+        let element = useRoutes([
+                { path: "/", element: <LogIn/>},
                 { path: "/register", element: <SignUp /> },
-                { path: "/", element: <Home /> },
                 { path: "/reset-password", element : <ResetPassword/>},
                 { path: "/enter-otp", element : <EnterOTP/>},
                 { path: "/change-password", element : <ChangePassword/>}
@@ -20,4 +32,4 @@ const ProjectRoutes = () => {
         return element;
 };
 
-export default ProjectRoutes;
+export {ProjectRoutes, AuthRoutes};

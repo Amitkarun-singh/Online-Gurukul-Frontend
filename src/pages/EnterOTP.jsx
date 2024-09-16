@@ -123,7 +123,7 @@ const EnterOTP = () => {
                                             Submit
                                         </Button>
                                 </form>
-                                <div onClick={handleResendOTP} size="md" className="w-full flex justify-center items-center rounded-[10px] font-medium bg-white-a700 px-[2.13rem] text-[1.00rem] text-blue-300_01 border border-gray-500_01 h-[3.13rem] cursor-pointer">
+                                <div onClick={handleResendOTP} size="md" className="w-full flex justify-center items-center rounded-[10px] font-medium bg-white-a700 px-[2.13rem] text-[1.00rem] text-blue-400_01 border border-gray-500_01 h-[3.13rem] cursor-pointer">
                                     Request OTP Again
                                 </div>
                             </div>
@@ -133,8 +133,8 @@ const EnterOTP = () => {
                             <Heading as="h6" className="!text-[1.00rem]">
                                 Remember the Password?
                             </Heading>
-                            <a href="/login" className="self-end">
-                                <Heading as="p" className="!text-[1.00rem] !text-[#00BEFF]">
+                            <a href="/" className="self-end">
+                                <Heading as="p" className="!text-[1.00rem] !text-blue-400_01">
                                     Log in
                                 </Heading>
                             </a>
