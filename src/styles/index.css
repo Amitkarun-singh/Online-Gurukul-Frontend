@@ -56,3 +56,15 @@ input:focus {
 .alice-carousel__dots-item {
     cursor: pointer;
 }
+
+
+
+/* Neumorphism Shadows */
+.shadow-inner-neumorphism {
+    box-shadow: inset 4px 4px 8px rgba(255, 255, 255, 0.5), inset -4px -4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.shadow-outer-neumorphism {
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.15), -4px -4px 8px rgba(255, 255, 255, 0.8);
+}
+

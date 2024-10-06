@@ -24,7 +24,7 @@ function App() {
                 <>
                   <Navbar user = {user}/>
                   <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-                  <ProjectRoutes sidebarOpen={sidebarOpen}/>
+                  <ProjectRoutes user = {user} sidebarOpen={sidebarOpen}/>
                 </>
               ) :
               (
