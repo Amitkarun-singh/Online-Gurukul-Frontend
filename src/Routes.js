@@ -8,10 +8,13 @@ import ResetPassword from "./pages/ResetPassword";
 import ChangePassword from "./pages/ChangePassword";
 import ClassManagement from "./pages/ClassManagement";
 
-const ProjectRoutes = ({sidebarOpen}) => {
+const ProjectRoutes = ({sidebarOpen , user}) => {
         let element = useRoutes([
                 { path: "/", element: <Home sidebarOpen={sidebarOpen}/> },
-                { path: "/class-management/:classRoomId", element: <ClassManagement /> },
+                { path: "/class-management/:classRoomId", element: <ClassManagement user={user} sidebarOpen={sidebarOpen}/> },
+                // { path: "/reset-password", element : <ResetPassword/>},
+                // { path: "/enter-otp", element : <EnterOTP/>},
+                // { path: "/change-password", element : <ChangePassword/>}
         ]);
 
         return element;
