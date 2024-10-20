@@ -4,14 +4,15 @@ import { useNavigate } from 'react-router-dom';
 
 const Card = ({ classRoom }) => {
   const navigate = useNavigate();
+
   const handleCardClick = () => {
     console.log("Card clicked:", classRoom._id); 
-  if (classRoom._id) {
-    navigate(`/class-management/${classRoom._id}`);
-  } else {
-    console.error("classRoom._id is undefined");
-  }
-  console.log("end");
+    if (classRoom._id) {
+      navigate(`/class-management/${classRoom._id}`);
+    } else {
+      console.error("classRoom._id is undefined");
+    }
+    console.log("end");
   };
 
   return (

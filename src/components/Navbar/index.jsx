@@ -5,11 +5,13 @@ import { CloseSVG } from "../Input/close";
 import { useDispatch, useSelector } from 'react-redux';
 import { show } from '../../Redux/Slices/classroomSlice'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { logout } from "../../Redux/Slices/authSlice";
 
 const Navbar = ({user}) => {
     const [searchBarValue, setSearchBarValue] = useState("");
     console.log(user);
-    
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const searchItems = async (query) => {
@@ -28,6 +30,8 @@ const Navbar = ({user}) => {
             dispatch(show(data))
         } catch (error) {
             console.error(error);
+            dispatch(logout());
+            navigate("/")
         }
     }
 
