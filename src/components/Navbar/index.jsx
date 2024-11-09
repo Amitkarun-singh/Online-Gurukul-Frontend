@@ -60,7 +60,7 @@ const Navbar = ({user}) => {
                 <div className="flex items-center">
                     <div className="text-xl font-semibold ml-4">
                         <img
-                            src="Images/img_header_main_logo.png"
+                            src="/Images/img_header_main_logo.png"
                             alt="Header Logo"
                             className="h-[3.38rem] w-[10.25rem] object-contain"
                         />
@@ -73,7 +73,7 @@ const Navbar = ({user}) => {
                         placeholder={`Search for something`}
                         value={searchBarValue}
                         onChange={handleSearch} // Use the search handler
-                        prefix={<Img src="images/img_search_blue_gray_400.svg" alt="Search" className="h-[1.25rem] w-[1.25rem]" />}
+                        prefix={<Img src="/Images/img_search_blue_gray_400.svg" alt="Search" className="h-[1.25rem] w-[1.25rem]" />}
                         suffix={
                             searchBarValue?.length > 0 ? (
                                 <CloseSVG onClick={() => setSearchBarValue("")} fillColor="#888ea2ff" className='cursor-pointer' />

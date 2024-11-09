@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const Video = () => {
-    const params = useParams();
-    const videoId = '66f83583af0d9d0e51d8b408';
-    const lectureId = '66ef1bfe177f3c76e431e080';
+    const videoId = useSelector((state) => state.videoId.videoId);
+    const lectureId = useSelector((state) => state.videoId.lectureId);
     const [video, setVideo] = useState([]);
     const [loading, setloading] = useState(false);
 
@@ -23,19 +22,19 @@ const Video = () => {
 
     useEffect(() => {
         FetchVideoData();
-    }, [])
+    }, [videoId, lectureId]);
 
     return (
-        <div className="pb-5 mt-3">
+        <div className="pb-5 mt-3 ">
             {
                 loading ? (
-                    <div>Loading...</div>
+                    <div>Click on Lecture 1 or refresh the page.</div>
                 ) : (
                     <div className="row">
                         <div className="col">
-                            <div className="relative video-wrap" style={{ height: "465px" }}>
+                            <div className="relative video-wrap" style={{ height: "625px" }}>
                                 <video className=" w-full h-full" controls>
-                                    <source src={video.videoFile} type="video/mp4"/>
+                                    <source className='min-w-full h-full' src={video.videoFile} type="video/mp4"/>
                                     Your browser does not support the video tag.
                                 </video>
                             </div>

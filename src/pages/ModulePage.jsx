@@ -1,67 +1,56 @@
-// import React, { useEffect, useState } from 'react'
-// import Playlist from '../components/Playlist';
-// import axios from 'axios';
-// import Video from '../components/Video';
+import React, { useState } from 'react';
+import Module from '../components/Module';
 
-// const ModulePage = () => {
+const ModulePage = ({ sidebarOpen, user }) => {
+    const [activeTab, setActiveTab] = useState('notes'); // Ensure initial value is the same as one of the tab names
 
-//     const moduleId = '66ef1b88177f3c76e431e07b';
-//     const [lectures, setLectures] = useState([]);
-//     const [isloading, setIsLoading] = useState(false);
+    const tabs = [
+        { name: 'notes', label: 'Notes' },
+        { name: 'lectures', label: 'Lectures' },
+        { name: 'homework', label: 'Homework' },
+    ];
 
-//     async function fetchPlaylistData() {
-//         try {
-//             const response = await axios.get(`/api/v1/lecture/${moduleId}`);
-//             console.log(response.data.data);
-//             setLectures(response.data.data);
-//             setIsLoading(false);
-//         } catch (error) {
-//             console.error(error);
-//         }
-//     }
+    console.log('Current active tab:', activeTab); // Debug: Check activeTab on initial render
 
-//     useEffect(() => {
-//         setIsLoading(true);
-//         fetchPlaylistData();
-//     }, []);
-//     return (
-//         <div className='flex  justify-around'>
-//             <div>
-//                 <Video/>
-//             </div>
-//             <div>
-//                 {
-//                     isloading ? (
-//                         <div>Loading...</div>
-//                     ) : (
-//                         <div className='w-72 max-h-screen bg-white-a700 overflow-y-scroll scrollbar-hide'>
-//                             {
-//                                 lectures.map((lecture) => (
-//                                     <div key={lecture._id}>
-//                                         <Playlist key={lecture._id} lecture={lecture} isActive={lecture._id === 0}/>
-//                                     </div>
-//                                 ))
-//                             }
-//                         </div>
-//                     )
-//                 }
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default ModulePage
-
-
-import React, { useEffect, useState } from 'react'
-import Moduel from '../components/Module'
-
-const ModulePage = () => {
     return (
-        <div>
-            <Moduel/>
-        </div>
-    )
-}
+        <div className={`p-6 mt-16 ${sidebarOpen ? 'ml-64' : 'ml-16'}`}>
+            <nav className={`${activeTab === 'lectures' ? 'w-[79.5%]' : 'w-full'} bg-white-a700 p-1 rounded-lg shadow`}>
+                <div className="flex justify-between items-center gap-1">
+                    {tabs.map((tab) => (
+                        <button
+                            key={tab.name}
+                            onClick={() => setActiveTab(tab.name)}
+                            className={`px-6 py-2 rounded-lg text-gray-900 text-sm transition-all ${
+                                activeTab === tab.name
+                                    ? 'text-white-a700 bg-gradient-to-b from-blue-200_01 to-blue-400_01 shadow-inner'
+                                    : 'hover:text-white-a700 hover:bg-blue-200_01'
+                            }`}
+                        >
+                            {tab.label}
+                        </button>
+                    ))}
+                </div>
+            </nav>
 
-export default ModulePage
+            {activeTab === 'notes' && (
+                <div className="mt-4">
+                    <h1>Notes</h1>
+                </div>
+            )}
+
+            {activeTab === 'lectures' && (
+                <div className="mt-4">
+                    <Module user={user} />
+                </div>
+            )}
+
+            {activeTab === 'homework' && (
+                <div className="mt-4">
+                    <h1>Homework</h1>
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default ModulePage;
