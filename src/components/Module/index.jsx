@@ -6,7 +6,7 @@ import { Input } from '../Input';
 import { Button } from '../Button';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import {addLectureId, addVideoId, removeVideoId, removeLectureId} from '../../Redux/Slices/videoSlice';
+import {addLectureId, removeVideoId, removeLectureId} from '../../Redux/Slices/videoSlice';
 
 const Video = lazy(() => import('../Video'));
 const Doubt = lazy(() => import('../Doubt'));
@@ -85,7 +85,43 @@ const Module = ({user}) => {
                 {isloading ? (
                     <div>Loading...</div>
                 ) : lectures.length === 0 ? (
-                    <div>No lecture is present</div>
+                    <div>
+                        <div>No lecture is present</div>
+                        <div className={`flex gap-2 mx-auto items-center justify-center py-2 w-full hover:cursor-pointer ${user.role === 'teacher' ? 'block' : 'hidden'}`} onClick = {clickHandler}>
+                            Add Lecture 
+                            <Img src="/Images/add-button.svg" alt="Add button" className={`text-gray-900 text-base font-semibold h-[1rem] w-[1rem] cursor-pointer`}/>
+                        </div>
+                        <div>
+                            {isFormVisible && (
+                                <div className='mb-4'>
+                                    <form onSubmit={handleSubmit} className='flex justify-center items-center gap-2 p-2'>
+                                    <Input
+                                            color="white_A700"
+                                            size="sm"
+                                            type="text"
+                                            name="lecturename"
+                                            placeholder="Enter Lecture Title"
+                                            onChange={handleChange}
+                                            prefix={
+                                                <Img
+                                                    src="/Images/img_message_24_outline.svg"
+                                                    alt="Message / 24 / Outline"
+                                                    className="mb-[0.13rem] h-[1.13rem] w-[1.13rem]"
+                                                />
+                                            }
+                                            className="gap-[0.88rem] self-stretch rounded-br-[10px] rounded-tr-[10px] border border-solid border-gray-300"
+                                        />
+                                        <Button
+                                        size="md"
+                                        type="submit"
+                                        className="bg-[#00BEFF] rounded-[10px] font-medium px-2">
+                                            Create
+                                        </Button>
+                                    </form>
+                                </div>
+                            )}
+                        </div>
+                    </div>
                 ) : (
                     <div className={`max-h-screen bg-white-a700 overflow-y-scroll scrollbar-hide pb-16`}>
                         {lectures.map((lecture) => (

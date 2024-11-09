@@ -57,6 +57,10 @@ const Playlist = ({lecture, isActive, moduleId,user}) => {
         setIsVideoFormVisible(!isVideoFormVisible);
     };
 
+    const clickOutSideHandler = () => {
+        setIsVideoFormVisible(false);
+    }
+
     useEffect(() => {
         if (lecture.id === 1) {
             setIsVisible(true);
@@ -187,13 +191,23 @@ const Playlist = ({lecture, isActive, moduleId,user}) => {
                                             className="gap-[0.88rem]  self-stretch justify-item item-center rounded-[10px] border border-solid border-gray-300 px-3 py-2"
                                         />
                                     </div>
-                                    <Button
-                                        size="md"
-                                        type="submit"
-                                        className="min-w-[23.13rem] bg-[#00BEFF] rounded-[10px] font-medium"
-                                    >
-                                        Add Button
-                                    </Button>
+                                    <div className='flex gap-5'>
+                                        <Button
+                                            size="md"
+                                            type="submit"
+                                            className="bg-[#00BEFF] rounded-[10px] font-medium"
+                                        >
+                                            Add
+                                        </Button>
+                                        <Button
+                                            onClick={clickOutSideHandler}
+                                            size="md"
+                                            type="submit"
+                                            className="bg-white-a700 text-[#00BEFF] rounded-[10px] font-medium border border-solid border-[#00BEFF]"
+                                        >
+                                            cancel
+                                        </Button>
+                                    </div>
                                     {isLoading && (
                                         <div className="loading-spinner">
                                             <p>Uploading video, please wait...</p>
