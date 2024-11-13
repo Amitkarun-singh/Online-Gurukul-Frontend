@@ -7,6 +7,7 @@ import EnterOTP from "./pages/EnterOTP";
 import ResetPassword from "./pages/ResetPassword";
 import ChangePassword from "./pages/ChangePassword";
 import ClassManagement from "./pages/ClassManagement";
+import CreateHomework from "./components/AllAssignment/index";
 
 const ProjectRoutes = ({sidebarOpen , user}) => {
         let element = useRoutes([
@@ -14,6 +15,7 @@ const ProjectRoutes = ({sidebarOpen , user}) => {
                 // { path: "/register", element: <SignUp /> },
                 { path: "/", element: <Home sidebarOpen={sidebarOpen}/> },
                 { path: "/class-management/:classRoomId", element: <ClassManagement user={user} sidebarOpen={sidebarOpen}/> },
+                { path: "/create-homework", element: <CreateHomework user={user} sidebarOpen={sidebarOpen}/> },
                 // { path: "/reset-password", element : <ResetPassword/>},
                 // { path: "/enter-otp", element : <EnterOTP/>},
                 // { path: "/change-password", element : <ChangePassword/>}
