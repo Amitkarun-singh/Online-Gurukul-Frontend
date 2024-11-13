@@ -6,15 +6,14 @@ import Home from "./pages/Home";
 import EnterOTP from "./pages/EnterOTP";
 import ResetPassword from "./pages/ResetPassword";
 import ChangePassword from "./pages/ChangePassword";
+import ClassManagement from "./pages/ClassManagement";
+import ModulePage from "./pages/ModulePage";
 
-const ProjectRoutes = ({sidebarOpen}) => {
+const ProjectRoutes = ({sidebarOpen , user}) => {
         let element = useRoutes([
-                // { path: "/login", element: <LogIn/>},
-                // { path: "/register", element: <SignUp /> },
                 { path: "/", element: <Home sidebarOpen={sidebarOpen}/> },
-                // { path: "/reset-password", element : <ResetPassword/>},
-                // { path: "/enter-otp", element : <EnterOTP/>},
-                // { path: "/change-password", element : <ChangePassword/>}
+                { path: "/class-management/:classRoomId", element: <ClassManagement user={user} sidebarOpen={sidebarOpen}/> },
+                { path: "/module/:moduleId", element: <ModulePage user={user} sidebarOpen={sidebarOpen}/>},
         ]);
 
         return element;
@@ -26,7 +25,7 @@ const AuthRoutes = () => {
                 { path: "/register", element: <SignUp /> },
                 { path: "/reset-password", element : <ResetPassword/>},
                 { path: "/enter-otp", element : <EnterOTP/>},
-                { path: "/change-password", element : <ChangePassword/>}
+                { path: "/change-password", element : <ChangePassword/>},
         ]);
 
         return element;

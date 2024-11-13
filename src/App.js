@@ -4,6 +4,9 @@ import {ProjectRoutes, AuthRoutes} from './Routes';
 import { useSelector } from "react-redux";
 import { Navbar } from './components/Navbar';
 import { Sidebar } from './components/Sidebar';
+import ModulePage from './pages/ModulePage';
+import Doubt from './components/Doubt';
+
 
 function App() {
   const { user, loading, error } = useSelector((state) => state.auth);
@@ -16,6 +19,8 @@ function App() {
   
   return (
         <div className='bg-blue-400_01 bg-opacity-65 w-[100%] h-[100%] min-h-screen min-w-full'>
+          {/* <ModulePage/> */}
+          {/* <Doubt/> */}
           <Router>
             {
               user? 
@@ -23,7 +28,7 @@ function App() {
                 <>
                   <Navbar user = {user}/>
                   <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-                  <ProjectRoutes sidebarOpen={sidebarOpen}/>
+                  <ProjectRoutes user = {user} sidebarOpen={sidebarOpen}/>
                 </>
               ) :
               (
@@ -33,6 +38,7 @@ function App() {
               )
             }
           </Router>
+          
         </div>
   );
 }
