@@ -4,21 +4,22 @@ import { Trash2 } from 'lucide-react';
 import ConfirmationModal from '../ConfirmationModal';
 import {Tooltip} from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
+import { useParams } from 'react-router-dom';
 
-export default function HomeworkSystem({
-  initialSubmissions = [
-    { studentName: 'John Doe', submissionTime: '2024-01-10 14:30', fileUrl: '#' },
-    { studentName: 'Jane Smith', submissionTime: '2024-01-10 15:45', fileUrl: '#' },
-    { studentName: 'Mike Johnson', submissionTime: '2024-01-10 16:20', fileUrl: '#' },
-  ]
-}) {
-  const userRole = 'student'; 
-  const homeworkId = '67343f461e0eb2e6fb436672';
-  const moduleId = '66f950202e519f72fc033ae0';
-  const currentUserId = '66f9316fdc7df32f1c4bf672';
+const SpecificAssignment=({user})=> {
+  // const userRole = 'student'; 
+  // const homeworkId = '67343f461e0eb2e6fb436672';
+  // const moduleId = '66f950202e519f72fc033ae0';
+  // const currentUserId = '66f9316fdc7df32f1c4bf672';
+
+  const params = useParams();
+  const homeworkId = params.homeworkId;
+  const moduleId = params.moduleId;
+  const currentUserId = user._id;
+  const userRole = user.role;
 
   const [submissionFile, setSubmissionFile] = useState(null);
-  const [submissions, setSubmissions] = useState(initialSubmissions);
+  const [submissions, setSubmissions] = useState();
   const [studentSubmission, setStudentSubmission] = useState(null);
   const [homework, setHomework] = useState(null);
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
@@ -107,8 +108,8 @@ export default function HomeworkSystem({
 
   return (
     homework && (
-      <div className="min-h-screen bg-gray-100 p-6">
-        <div className="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+      <div className="min-h-screen mt-16 p-6">
+        <div className="max-w-4xl mx-auto bg-gray-50 p-6 rounded-lg shadow-lg">
           <div className="grid gap-6">
             <div className="flex justify-between items-start">
               <div>
@@ -213,6 +214,8 @@ export default function HomeworkSystem({
     )
   );
 }
+
+export default SpecificAssignment;
 
 
 

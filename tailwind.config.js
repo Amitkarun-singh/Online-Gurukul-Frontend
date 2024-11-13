@@ -111,6 +111,20 @@ module.exports = {
     },
     screens: { md: { max: "1050px" }, sm: { max: "550px" } },
   },
-  plugins: [require("@tailwindcss/forms")],
+  plugins: [
+    require("@tailwindcss/forms"),
+    function ({ addUtilities }) {
+      addUtilities({
+        '.scrollbar-hide': {
+          '-webkit-overflow-scrolling': 'touch',
+          'scrollbar-width': 'none', 
+          '-ms-overflow-style': 'none',
+        },
+        '.scrollbar-hide::-webkit-scrollbar': {
+          display: 'none',
+        },
+      });
+    }
+  ],
 };
 

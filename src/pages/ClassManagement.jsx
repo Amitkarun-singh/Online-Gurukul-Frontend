@@ -7,6 +7,7 @@ import { Input } from '../components/Input';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import ConfirmationModal from '../components/ConfirmationModal';
+import { useNavigate } from 'react-router-dom';
 
 export default function ClassManagement({ user }) {
   const [modules, setModules] = useState([]);
@@ -25,6 +26,7 @@ export default function ClassManagement({ user }) {
 
   const params = useParams();
   const classRoomId = params.classRoomId;
+  const navigate = useNavigate();
   const modalRef = useRef(null);
 
   const fetchClassroomData = async () => {
@@ -220,6 +222,16 @@ export default function ClassManagement({ user }) {
     }
   };
 
+  const handleCardClick = (moduleId) => {
+      console.log("Module clicked:", moduleId);
+      if (moduleId) {
+        navigate(`/module/${moduleId}`);
+      } else {
+        console.error("moduleId is undefined");
+      }
+      console.log("end");
+  };
+
   return (
     <div className="w-full max-w-5xl mx-auto bg-white-a700 bg-opacity-10 rounded-lg overflow-hidden backdrop-blur-lg border border-white border-opacity-20 shadow-lg shadow-outer-neumorphism">
       <div className={`p-16 ${isModalOpen ? 'blur-sm' : ''}`}>
@@ -336,7 +348,7 @@ export default function ClassManagement({ user }) {
               {modules.map((module, index) => (
                 <div key={index} className="bg-white bg-opacity-40 border border-gray-200 rounded-lg shadow-inner-neumorphism backdrop-blur-lg">
                   <div className="p-4 flex justify-between items-center">
-                    <span className="text-black">{module.moduleName}</span>
+                    <span className="text-black hover:cursor-pointer" onClick={() => handleCardClick(module._id)}>{module.moduleName}</span>
                     <Button
                       onClick={() => openConfirmationModal('Are you sure you want to delete this module?', () => handleDeleteModule(index, module._id))}
                       className={`p-1 hover:bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-red-500 ${user.role === 'teacher' ? 'block' : 'hidden'}`}

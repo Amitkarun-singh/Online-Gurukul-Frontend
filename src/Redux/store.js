@@ -3,6 +3,7 @@ import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; 
 import authReducer from './Slices/authSlice';
 import classroomSlice from './Slices/classroomSlice';
+import videoSlice from './Slices/videoSlice';
 
 
 const persistConfig = {
@@ -16,6 +17,7 @@ const store = configureStore({
   reducer: {
     auth: persistedReducer,
     classRooms: classroomSlice,
+    videoId: videoSlice,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

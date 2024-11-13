@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react';
 import { Trash2, Edit } from 'lucide-react';
 import ConfirmationModal from '../ConfirmationModal';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-export default function Component() {
+
+  const AllAssignment=({ user })=> {
   const [homeworks, setHomeworks] = useState([]);
-  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [selectedHomework, setSelectedHomework] = useState(null);
   const [newHomework, setNewHomework] = useState({
@@ -17,8 +20,10 @@ export default function Component() {
   const [isConfirmationOpen, setIsConfirmationOpen] = useState(false);
   const [confirmationMessage, setConfirmationMessage] = useState('');
   const [confirmationAction, setConfirmationAction] = useState(null);
+  const navigate = useNavigate();
 
-  const moduleId = '66f950202e519f72fc033ae0';
+  const params = useParams();
+  const moduleId = params.moduleId;
 
   // Helper function to format date to "yyyy-MM-dd"
   const formatDate = (isoDate) => {
@@ -59,7 +64,7 @@ export default function Component() {
       });
       fetchHomeworks();
       setNewHomework({ title: '', dueDate: '', description: '', homeworkFile: null });
-      setIsAddModalOpen(false);
+      setIsModalOpen(false);
     } catch (error) {
       console.error('Error adding homework:', error);
     }
@@ -128,19 +133,30 @@ export default function Component() {
     }
   };
 
+  const handleCardClick = (homeworkId) => {
+    console.log("Homework clicked:", homeworkId);
+    if (homeworkId) {
+      navigate(`/module/${moduleId}/homework/${homeworkId}`);
+    } else {
+      console.error("homeworkId is undefined");
+    }
+    console.log("end");
+};
+  
+
   return (
     <div className="p-12 w-full max-w-5xl mx-auto bg-white rounded-lg shadow">
       <div className="p-4 bg-gray-50">
         <div className="flex justify-end">
-          <button onClick={() => setIsAddModalOpen(true)} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+          <button onClick={() => setIsModalOpen(true)} className={`bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 ${user.role === 'teacher' ? 'block' : 'hidden'}`} >
             ADD HOMEWORK
           </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
           {homeworks.map((homework) => (
-            <div key={homework.id} className="border rounded-lg p-4 cursor-pointer hover:shadow-md transition-shadow relative">
-              <div>
+            <div  key={homework.id} className="border rounded-lg p-4 cursor-pointer hover:shadow-md transition-shadow relative">
+              <div onClick={() => handleCardClick(homework._id)}>
                 <h3 className="font-medium">Title: {homework.title}</h3>
                 <p className="text-sm text-gray-600">Due Date: {new Date(homework.dueDate).toLocaleDateString()}</p>
                 {homework.homeworkFile && (
@@ -149,13 +165,13 @@ export default function Component() {
               </div>
               <button
                 onClick={() => openUpdateModal(homework)}
-                className="absolute top-2 right-10 text-blue-500 hover:text-blue-700"
+                className={`absolute top-2 right-10 text-blue-500 hover:text-blue-700 ${user.role === 'teacher' ? 'block' : 'hidden'}`}
               >
                 <Edit className="h-5 w-5" />
               </button>
               <button
                 onClick={() => openConfirmationModal('Are you sure you want to delete this homework?', () => handleDeleteHomework(homework._id))}
-                className="absolute top-2 right-2 text-red-500 hover:text-red-700"
+                className={`absolute top-2 right-2 text-red-500 hover:text-red-700 ${user.role === 'teacher' ? 'block' : 'hidden'}`}
               >
                 <Trash2 className="h-5 w-5" />
               </button>
@@ -164,13 +180,71 @@ export default function Component() {
         </div>
 
         {/* Add Homework Modal */}
-        {isAddModalOpen && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <div className="bg-white p-6 rounded-lg w-full max-w-md">
-              {/* Add Homework Form here */}
+                    {isModalOpen && (
+          <div className="fixed inset-0 bg-white-a700 bg-opacity-50 flex items-center justify-center">
+            <div className="bg-white-a700 p-6 rounded-lg w-full max-w-md">
+              <h2 className="text-xl font-semibold mb-4">Add New Homework</h2>
+              <form onSubmit={handleAddHomework} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Title</label>
+                  <input
+                    type="text"
+                    value={newHomework.title}
+                    onChange={(e) => setNewHomework({ ...newHomework, title: e.target.value })}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Description</label>
+                  <textarea
+                    value={newHomework.description}
+                    onChange={(e) => setNewHomework({ ...newHomework, description: e.target.value })}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Due Date</label>
+                  <input
+                    type="date"
+                    value={newHomework.dueDate}
+                    onChange={(e) => setNewHomework({ ...newHomework, dueDate: e.target.value })}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700">Upload Homework File</label>
+                  <input
+                    type="file"
+                    accept=".pdf"
+                    onChange={handleFileUpload}
+                    className="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                    required
+                  />
+                </div>
+                <div className="flex justify-end">
+                  <button
+                    type="button"
+                    onClick={() => setIsModalOpen(false)}
+                    className="bg-gray-500 text-white px-4 py-2 rounded mr-2 hover:bg-gray-600"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                  >
+                    Add Homework
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         )}
+      
+                  
 
         {/* Update Homework Modal */}
         {isUpdateModalOpen && (
@@ -247,6 +321,9 @@ export default function Component() {
     </div>
   );
 }
+
+export default AllAssignment;
+
 
 
 // import { useState, useEffect } from 'react';
