@@ -4,6 +4,9 @@ import {ProjectRoutes, AuthRoutes} from './Routes';
 import { useSelector } from "react-redux";
 import { Navbar } from './components/Navbar';
 import { Sidebar } from './components/Sidebar';
+// import SpecificAssignment from './components/SpecificAssignment/index.jsx'
+// import AllAssignment from './components/AllAssignment/index.jsx';
+
 import ModulePage from './pages/ModulePage';
 import Doubt from './components/Doubt';
 
@@ -19,8 +22,6 @@ function App() {
   
   return (
         <div className='bg-blue-400_01 bg-opacity-65 w-[100%] h-[100%] min-h-screen min-w-full'>
-          {/* <ModulePage/> */}
-          {/* <Doubt/> */}
           <Router>
             {
               user? 
@@ -38,6 +39,8 @@ function App() {
               )
             }
           </Router>
+          {/* <SpecificAssignment /> */}
+          {/* <AllAssignment /> */}
           
         </div>
   );

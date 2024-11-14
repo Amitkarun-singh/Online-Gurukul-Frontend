@@ -8,14 +8,14 @@ import ResetPassword from "./pages/ResetPassword";
 import ChangePassword from "./pages/ChangePassword";
 import ClassManagement from "./pages/ClassManagement";
 import ModulePage from "./pages/ModulePage";
-// import CreateNotes from "./pages/CreateNotes";
+import SpecificAssignment from "./components/SpecificAssignment";
 
 const ProjectRoutes = ({sidebarOpen , user}) => {
         let element = useRoutes([
                 { path: "/", element: <Home sidebarOpen={sidebarOpen}/> },
                 { path: "/class-management/:classRoomId", element: <ClassManagement user={user} sidebarOpen={sidebarOpen}/> },
                 { path: "/module/:moduleId", element: <ModulePage user={user} sidebarOpen={sidebarOpen}/>},
-                // { path: "/create-notes", element : <CreateNotes/>}
+                { path: "/module/:moduleId/homework/:homeworkId", element: <SpecificAssignment user={user} sidebarOpen={sidebarOpen}/>},
         ]);
 
         return element;

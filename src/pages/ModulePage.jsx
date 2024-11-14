@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import Module from '../components/Module';
 import CreateNotes from './CreateNotes';
+import AllAssignment from '../components/AllAssignment';
 
 const ModulePage = ({ sidebarOpen, user }) => {
-    const [activeTab, setActiveTab] = useState('notes'); // Ensure initial value is the same as one of the tab names
+    const [activeTab, setActiveTab] = useState('notes');
 
     const tabs = [
         { name: 'notes', label: 'Notes' },
@@ -11,8 +12,7 @@ const ModulePage = ({ sidebarOpen, user }) => {
         { name: 'homework', label: 'Homework' },
     ];
 
-    console.log('Current active tab:', activeTab); // Debug: Check activeTab on initial render
-
+    console.log('Current active tab:', activeTab); 
     return (
         <div className={`p-6 mt-16 ${sidebarOpen ? 'ml-64' : 'ml-16'}`}>
             <nav className={`${activeTab === 'lectures' ? 'w-[79.5%]' : 'w-full'} bg-white-a700 p-1 rounded-lg shadow`}>
@@ -35,8 +35,7 @@ const ModulePage = ({ sidebarOpen, user }) => {
 
             {activeTab === 'notes' && (
                 <div className="mt-4">
-                    {/* <h1>Notes</h1> */}
-                    <CreateNotes user={user} />
+                    <CreateNotes user={user}/>
                 </div>
             )}
 
@@ -48,9 +47,10 @@ const ModulePage = ({ sidebarOpen, user }) => {
 
             {activeTab === 'homework' && (
                 <div className="mt-4">
-                    <h1>Homework</h1>
+                    <AllAssignment user={user} />
                 </div>
             )}
+            
         </div>
     );
 };

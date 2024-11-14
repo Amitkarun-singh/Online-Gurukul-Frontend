@@ -51,34 +51,14 @@ export default function CreateNotes({user}) {
 
   // Handle file upload
   const handleFileUpload = (e) => {
-    // const notesFile = e.target.files?.[0];
-    // if (notesFile) {
-    //   setNewNote({ ...newNote, notesFile });
-    // }
     setNewNote({...newNote, notesFile:e.target.files[0]})
   };
 
-  // // Handle deletion of a note
-  // const handleDeleteNote = (id) => {
-  //   // Ensure this logs when the delete function is triggered
-  //   console.log("Deleting note with ID:", id);
-
-  //   const isConfirmed = window.confirm("Are you sure you want to delete this note?");
-  //   if (!isConfirmed) {
-  //       return; 
-  //   }
-  // };
-
-  // Handle the deletion of a note
   const handleDeleteNote = async (noteId) => {
     console.log(noteId)
     try {
-        // Send delete request to the backend
         const response = await axios.delete(`/api/v1/notes/${moduleId}/${noteId}`);
         console.log(response)
-        // Update the notes state by filtering out the deleted note
-        // const updatedNotes = notes.filter(note => note.id !== id);
-        // setNotes(updatedNotes);
         fetchNotes();
         console.log("Note deleted:", noteId);
     } catch (error) {
@@ -89,7 +69,6 @@ export default function CreateNotes({user}) {
 
   // Initial fetch of notes when component mounts
   useEffect(() => {
-    
     fetchNotes();
   }, []);
 
@@ -102,8 +81,8 @@ export default function CreateNotes({user}) {
   return (
     <div className="p-12 w-full max-w-5xl mx-auto bg-white rounded-lg shadow">
       <div className="p-4 bg-gray-50">
-        <div className="flex justify-end">
-          <button onClick={() => setIsModalOpen(true)} className = {`bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 ${user.role === 'teacher' ? 'block' : 'hidden'}`}>
+        <div className={`flex justify-end ${user.role === 'teacher' ? 'block': 'hidden'}`}>
+          <button onClick={() => setIsModalOpen(true)} className={`bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700`}>
             ADD NOTES
           </button>
         </div>
@@ -115,18 +94,6 @@ export default function CreateNotes({user}) {
               key={note.id}
               className="border rounded-lg p-4 flex items-center cursor-pointer hover:shadow-md transition-shadow"
             >
-              {/* Thumbnail Icon
-              <div className="mr-4 text-gray-500">
-                {note.notesFile && note.notesFile.type === 'application/pdf' ? (
-                  <AiFillFilePdf size={40} />
-                ) : note.notesFile && note.notesFile.type.includes('word') ? (
-                  <AiFillFileWord size={40} />
-                ) : (
-                  <div className="w-10 h-10 bg-gray-200 flex items-center justify-center rounded-md">
-                    🗂️
-                  </div>
-                )}
-              </div> */}
 
               {/* Note Details */}
               <div className="flex-1" onClick={() => viewPdf(note.notesFile)}>

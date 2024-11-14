@@ -104,16 +104,16 @@ const Playlist = ({lecture, isActive, moduleId,user}) => {
     return (
         <div>
             <div onClick={handleCardClick} className={`cursor-pointer flex justify-between w-full p-4 border-b-2 hover:bg-blue-300_01 ${isActive ? 'bg-blue-300_01' : ''}`}>
-                <div className='flex justify-center items-center gap-5'>
+                <div className='flex justify-center items-center gap-12'>
                     <div className="flex items-start flex-col gap-1">
                         <h6 className="text-gray-900 text-base medium:text-lg leading-6 medium:leading-[26px] font-bold">
                         {lecture.lecturename}
                         </h6>
                         <p className="text-gray-900 text-xs medium:text-sm leading-[18px] medium:leading-[22px] font-medium text-left">
-                        {lecture.createdAt}
+                        {new Date(lecture.createdAt).toLocaleDateString()}
                         </p>
                     </div>
-                    <div className={`ml-auto hover:bg-red-200 w-8 h-8 flex justify-center items-center rounded-full ${user.role === 'teacher' ? 'block' : 'hidden'}`} onClick=        {deleteHandler}>
+                    <div className={` hover:bg-red-200 w-8 h-8 flex justify-center items-center rounded-full ${user.role === 'teacher' ? 'block' : 'hidden'}`} onClick=        {deleteHandler}>
                         <Img src="/Images/delete-button.svg" alt="delete image" className="w-5 h-5 rounded-full" />
                     </div>
                 </div>
