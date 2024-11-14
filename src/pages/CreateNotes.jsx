@@ -103,7 +103,7 @@ export default function CreateNotes({user}) {
     <div className="p-12 w-full max-w-5xl mx-auto bg-white rounded-lg shadow">
       <div className="p-4 bg-gray-50">
         <div className="flex justify-end">
-          <button onClick={() => setIsModalOpen(true)} className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+          <button onClick={() => setIsModalOpen(true)} className = {`bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 ${user.role === 'teacher' ? 'block' : 'hidden'}`}>
             ADD NOTES
           </button>
         </div>
