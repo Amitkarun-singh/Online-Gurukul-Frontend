@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Module from '../components/Module';
+import CreateNotes from './CreateNotes';
 
 const ModulePage = ({ sidebarOpen, user }) => {
     const [activeTab, setActiveTab] = useState('notes'); // Ensure initial value is the same as one of the tab names
@@ -34,7 +35,8 @@ const ModulePage = ({ sidebarOpen, user }) => {
 
             {activeTab === 'notes' && (
                 <div className="mt-4">
-                    <h1>Notes</h1>
+                    {/* <h1>Notes</h1> */}
+                    <CreateNotes/>
                 </div>
             )}
 
