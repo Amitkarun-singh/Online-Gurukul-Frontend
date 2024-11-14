@@ -34,8 +34,7 @@ const ModulePage = ({ sidebarOpen, user }) => {
 
             {activeTab === 'notes' && (
                 <div className="mt-4">
-                    {/* <h1>Notes</h1> */}
-                    <CreateNotes/>
+                    <CreateNotes user={user}/>
                 </div>
             )}
 
