@@ -6,7 +6,7 @@ import { Input } from '../Input';
 import { Button } from '../Button';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import {addLectureId, removeVideoId, removeLectureId} from '../../Redux/Slices/videoSlice';
+import {addLectureId, removeVideoId, removeLectureId, addVideoId} from '../../Redux/Slices/videoSlice';
 
 const Video = lazy(() => import('../Video'));
 const Doubt = lazy(() => import('../Doubt'));
@@ -32,16 +32,20 @@ const Module = ({user}) => {
                 console.error('No data found');
                 return;
             }
-            console.log('Playlist data' + response.data.data);
             setLectures(response.data.data);
-            if (lectures.length > 0) {
-                dispatch(addLectureId(lectures[0]._id));
-            }
+            console.log(lectures);
             setIsLoading(false);
         } catch (error) {
             console.error(error);
         }
     }
+
+    useEffect(() => {
+        if (lectures.length > 0) {
+            dispatch(addLectureId(lectures[0]._id));
+            dispatch(addVideoId(lectures[0].videos[0]));
+        }
+    }, [lectures, dispatch]);
 
     const handleChange = (e) => {
         setLectureData({ ...lectureData, [e.target.name]: e.target.value });

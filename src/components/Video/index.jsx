@@ -9,6 +9,8 @@ const Video = () => {
     const [loading, setloading] = useState(false);
 
     const FetchVideoData = async () => {
+        // console.log('hii '+ useSelector((state) => state.videoId.videoId));
+        
         try {
             setloading(true)
             const response = await axios.get(`/api/v1/video/${lectureId}/${videoId}`);
