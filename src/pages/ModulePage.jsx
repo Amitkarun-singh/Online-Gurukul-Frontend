@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Module from '../components/Module';
 import CreateNotes from './CreateNotes';
+import AllAssignment from '../components/AllAssignment';
 
 const ModulePage = ({ sidebarOpen, user }) => {
     const [activeTab, setActiveTab] = useState('notes');
@@ -46,9 +47,10 @@ const ModulePage = ({ sidebarOpen, user }) => {
 
             {activeTab === 'homework' && (
                 <div className="mt-4">
-                    <h1>Homework</h1>
+                    <AllAssignment user={user} />
                 </div>
             )}
+            
         </div>
     );
 };
